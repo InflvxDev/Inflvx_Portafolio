@@ -1,0 +1,53 @@
+---
+// src/components/HeroSection.astro
+const { title, subtitle, buttonText, avatarUrl } = Astro.props;
+---
+<section id="inicio" class="min-h-screen flex items-center justify-center px-12 md:px-24 lg:px-32 py-20 bg-gray-50">
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-8">
+    <!-- Columna 1: Avatar -->
+    <div class="w-full md:w-1/2 flex justify-center">
+      <img
+        src={avatarUrl}
+        alt="Avatar"
+        class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-xl border-4 border-blue-100"
+      />
+    </div>
+
+    <!-- Columna 2: Texto -->
+    <div class="w-full md:w-1/2 text-center md:text-left">
+      <h2 class="text-4xl md:text-3xl font-bold text-gray-800 mb-4">
+        {title}
+      </h2>
+      <p class="text-xl text-gray-600 mb-6">
+        {subtitle}
+      </p>
+      <a
+        href="#contacto"
+        class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+      >
+        {buttonText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = anchor.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+  
+        targetElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start' 
+        });
+
+        history.pushState(null, null, targetId);
+      }
+    });
+  });
+</script>
