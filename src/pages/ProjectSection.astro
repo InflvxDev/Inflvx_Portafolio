@@ -10,7 +10,14 @@ interface Project {
   repo?: string;
 }
 
-const { projects } = Astro.props;
+// Props con valor por defecto y validación
+const { projects = [] } = Astro.props;
+const safeProjects = Array.isArray(projects) ? projects.filter(project => 
+  project?.title && 
+  project?.description && 
+  project?.tags && 
+  project?.image
+) : [];
 ---
 
 <section
@@ -27,14 +34,28 @@ const { projects } = Astro.props;
       Mis Proyectos
     </h2>
 
-    <!-- Contenedor de proyectos -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      {projects.map((project: Project) => (
-        <div class="opacity-0 translate-y-10 animate-fadeIn transition-all duration-500 ease-out">
-          <ProjectCard project={project} />
-        </div>
-      ))}
-    </div>
+    <!-- Contenedor de proyectos con validación -->
+    {safeProjects.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {safeProjects.map((project: Project, index: number) => (
+          <div 
+            class="opacity-0 translate-y-10 animate-fadeIn transition-all duration-500 ease-out"
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+          No hay proyectos disponibles en este momento
+        </p>
+        <p class="text-gray-500 dark:text-gray-500 mt-2">
+          Pronto agregaré nuevos proyectos
+        </p>
+      </div>
+    )}
   </div>
 </section>
 
