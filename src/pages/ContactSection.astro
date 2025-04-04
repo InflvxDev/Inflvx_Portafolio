@@ -1,5 +1,4 @@
 ---
-// src/components/ContactSection.astro
 interface SocialLink {
   name: string;
   url?: string;
@@ -25,50 +24,67 @@ const socialLinks: SocialLink[] = [
   }
 ];
 ---
-<section id="contacto" class="py-4 px-8 md:px-16 lg:px-24 bg-gray-50">
-    <div class="container mx-auto max-w-4xl text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contáctame</h2>
-      <p class="text-xl text-gray-600 mb-8">
-        ¿Quieres colaborar o tienes alguna pregunta? Escríbeme o conéctate en mis redes.
+
+<section id="contacto" class="relative py-16 px-8 md:px-16 lg:px-24 bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 transition-colors duration-300">
+  <div class="container mx-auto max-w-3xl text-center">
+    
+    <!-- Caja con efecto glassmorphism -->
+    <div class="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 transition-all duration-300 hover:shadow-3xl">
+      
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
+        ¡Hablemos!
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+        ¿Tienes un proyecto interesante o alguna consulta?  
+        Contáctame a través de mis redes o envíame un mensaje.
       </p>
-  
-      <div class="flex justify-center items-center gap-4 flex-wrap">
-        {socialLinks.map((item, index) => (
-          <div class="flex items-center group">
-            <div class="h-4 w-6 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-full w-full text-gray-700 group-hover:text-blue-600 transition-colors"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d={item.icon} />
-              </svg>
-            </div>
-            {item.isEmail ? (
-              <a
-                href={`mailto:${item.name}?subject=Contacto%20desde%20portafolio&body=Hola%20Sebastián,%20te%20contacto%20por...`}
-                class="ml-2 text-gray-600 hover:text-blue-600 transition-colors select-all"
-                >
-                {item.name}
-              </a>
-            ) : (
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="ml-2 text-gray-600 group-hover:text-blue-600 transition-colors"
-                aria-label={item.name}
-              >
-                {item.name}
-              </a>
-            )}
-            {index < socialLinks.length - 1 && (
-              <span class="mx-2 text-gray-400">/</span>
-            )}
-          </div>
+
+      <!-- Links a redes sociales -->
+      <div class="flex justify-center items-center gap-6 flex-wrap">
+        {socialLinks.map((item) => (
+          <a
+            href={item.isEmail ? `mailto:${item.name}?subject=Contacto desde portafolio` : item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 bg-white/80 dark:bg-white/10 px-4 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            aria-label={item.name}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 text-gray-700 dark:text-gray-300 transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d={item.icon} />
+            </svg>
+            <span class="text-gray-700 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400">
+              {item.name}
+            </span>
+          </a>
         ))}
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Efectos CSS -->
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .shadow-3xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+</style>
