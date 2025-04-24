@@ -5,7 +5,7 @@ interface Project {
   title: string;
   description: string;
   tags: string[];
-  image: string;
+  images: string[];
   link?: string;
   repo?: string;
 }
@@ -16,7 +16,7 @@ const safeProjects = Array.isArray(projects) ? projects.filter(project =>
   project?.title && 
   project?.description && 
   project?.tags && 
-  project?.image
+  project?.images
 ) : [];
 ---
 
