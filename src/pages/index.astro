@@ -2,7 +2,9 @@
 
 import Layout from '../layouts/Layout.astro';
 import { projects } from '../data/projects';
+import { experience } from '../data/experience';
 import HeroSection from './HeroSection.astro';
+import ExperienceSection from './ExperienceSection.astro';
 import ProjectSection from './ProjectSection.astro';
 import ContactSection from './ContactSection.astro';
 
@@ -15,6 +17,8 @@ import ContactSection from './ContactSection.astro';
 		buttonText="Contáctame"
 		avatarUrl="https://avatars.githubusercontent.com/u/70963384?v=4"
 	/>
+
+	<ExperienceSection experience={experience} />
 
 	<ProjectSection projects={projects} />
 
