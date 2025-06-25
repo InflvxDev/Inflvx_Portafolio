@@ -1,10 +1,15 @@
 export const projects = [
   {
-    title: "OHI Hokoku",
-    description: "Script que automatiza el envío de mensajes en WhatsApp para la consulta y recordatorio de citas médicas.",
+    title: "OHI BloodShoot BS y STF",
+    description: "Plataforma integral para el registro y seguimiento de folios de banco de sangre y componentes de servicio transfusional de la organizacion humana integral OHI.",
     tags: ["Astro", "React", "Supabase", "SqlServer"],
-    images: ["/projects/hokokulogin.png", "/projects/hokokudash.png", "/projects/hokokureport.png"],
-    repo: "https://github.com/InflvxDev/Selenium-Wpp-Messages-Automatic",
+    images: ["/projects/bloodshotlogin.webp", "/projects/bloodshotfolioreg.webp", "/projects/bloodshotingcomp.webp", "/projects/bloodshotegrcomp.webp"],
+  },
+  {
+    title: "OHI Hokoku",
+    description: "Plataforma integral para la gestión y seguimiento de información de las áreas de servicio de la organizacion humana integral OHI.",
+    tags: ["Astro", "React", "Supabase", "SqlServer"],
+    images: ["/projects/hokokulogin.jpg", "/projects/hokokudash.webp", "/projects/hokokureport.webp"],
   },
   {
     title: "Selenium ChatBot",
