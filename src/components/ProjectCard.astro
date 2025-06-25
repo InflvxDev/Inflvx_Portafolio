@@ -98,7 +98,7 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
   }
 </style>
 
-<article class={`relative ${bgColor} dark:bg-white/10 backdrop-blur-xl rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 border border-white/30 p-6`}>
+<article class={`relative ${bgColor} backdrop-blur-xl rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 border border-white/30 p-6`}>
   
   <div class="flex flex-col h-full">
     <!-- Carrusel de imágenes -->
@@ -136,9 +136,9 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
       </div>
     )}
     
-    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
+    <h3 class="text-xl font-semibold mb-2 text-gray-900">{project.title}</h3>
 
-    <p class="text-gray-800 dark:text-gray-300 mb-4 min-h-[4rem] line-clamp-3">
+    <p class="text-gray-800 mb-4 min-h-[4rem] line-clamp-3">
       {project.description}
     </p>
     
@@ -146,9 +146,9 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
       {project.tags.map((tag: string, index: number) => (
         <span 
           class={`px-2 py-1 text-xs rounded-full ${
-            index % 3 === 0 ? "bg-white/50 text-gray-900 dark:text-white dark:bg-gray-700/40" :
-            index % 3 === 1 ? "bg-gray-100/50 text-gray-800 dark:text-white dark:bg-gray-600/40" :
-            "bg-gray-200/50 text-gray-700 dark:text-white dark:bg-gray-500/40"
+            index % 3 === 0 ? "bg-white/50 text-gray-900" :
+            index % 3 === 1 ? "bg-gray-100/50 text-gray-800" :
+            "bg-gray-200/50 text-gray-700"
           }`}
         >
           {tag}
@@ -161,7 +161,7 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
         <a 
           href={project.link} 
           target="_blank"
-          class="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1"
+          class="text-gray-900 hover:text-gray-700 flex items-center gap-1"
         >
           🔗 Demo
         </a>
@@ -170,7 +170,7 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
         <a 
           href={project.repo} 
           target="_blank"
-          class="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1"
+          class="text-gray-900 hover:text-gray-700 flex items-center gap-1"
           aria-label="Repositorio en GitHub"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -182,8 +182,8 @@ const bgColor = colors[Math.floor(Math.random() * colors.length)];
   </div>
 
   <!-- Efecto decorativo de cuerdita -->
-  <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded-full shadow-md"></div>
-  <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-0.5 h-4 bg-gray-400 dark:bg-gray-500"></div>
+  <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-300 rounded-full shadow-md"></div>
+  <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-0.5 h-4 bg-gray-400"></div>
 </article>
 
 <script is:inline>

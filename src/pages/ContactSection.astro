@@ -25,16 +25,16 @@ const socialLinks: SocialLink[] = [
 ];
 ---
 
-<section id="contacto" class="relative py-16 px-8 md:px-16 lg:px-24 bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 transition-colors duration-300">
+<section id="contacto" class="relative py-16 px-8 md:px-16 lg:px-24 bg-gradient-to-br from-blue-50 via-white to-gray-100 transition-colors duration-300">
   <div class="container mx-auto max-w-3xl text-center">
     
     <!-- Caja con efecto glassmorphism -->
-    <div class="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 transition-all duration-300 hover:shadow-3xl">
+    <div class="bg-white/60 backdrop-blur-lg rounded-2xl shadow-2xl p-10 transition-all duration-300 hover:shadow-3xl">
       
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
         ¡Hablemos!
       </h2>
-      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+      <p class="text-lg md:text-xl text-gray-600 mb-6 leading-relaxed">
         ¿Tienes un proyecto interesante o alguna consulta?  
         Contáctame a través de mis redes o envíame un mensaje.
       </p>
@@ -46,18 +46,18 @@ const socialLinks: SocialLink[] = [
             href={item.isEmail ? `mailto:${item.name}?subject=Contacto desde portafolio` : item.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 bg-white/80 dark:bg-white/10 px-4 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            class="flex items-center gap-3 bg-white/80 px-4 py-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
             aria-label={item.name}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6 text-gray-700 dark:text-gray-300 transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400"
+              class="w-6 h-6 text-gray-700 transition-colors duration-300 hover:text-blue-600"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d={item.icon} />
             </svg>
-            <span class="text-gray-700 dark:text-gray-200 font-medium hover:text-blue-600 dark:hover:text-blue-400">
+            <span class="text-gray-700 font-medium hover:text-blue-600">
               {item.name}
             </span>
           </a>

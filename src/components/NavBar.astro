@@ -5,11 +5,11 @@ const links = [
 ];
 ---
 
-<nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 transition-colors">
+<nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 transition-colors">
   <div class="container mx-auto flex justify-between py-4 px-6">
     
     <!-- Nombre a la izquierda -->
-    <a href="#inicio" class="text-gray-800 dark:text-white text-xl font-bold tracking-wide hover:text-blue-600 dark:hover:text-blue-400 transition-all">
+    <a href="#inicio" class="text-gray-800 text-xl font-bold tracking-wide hover:text-blue-600 transition-all">
       InflvxDev
     </a>
 
@@ -20,12 +20,12 @@ const links = [
           <li class="relative">
             <a
               href={link.path}
-              class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all font-semibold text-lg tracking-wide px-3 py-2 rounded-lg"
+              class="text-gray-700 hover:text-blue-600 transition-all font-semibold text-lg tracking-wide px-3 py-2 rounded-lg"
             >
               {link.name}
             </a>
             {index < links.length - 1 && (
-              <span class="absolute right-[-12px] top-1/2 transform -translate-y-1/2 w-[2px] h-4 bg-gray-400/40 dark:bg-gray-600/60"></span>
+              <span class="absolute right-[-12px] top-1/2 transform -translate-y-1/2 w-[2px] h-4 bg-gray-400/40"></span>
             )}
           </li>
         ))}
