@@ -5,37 +5,68 @@ const links = [
 ];
 ---
 
-<nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 transition-colors">
+<nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/90 shadow-lg transition-all duration-300">
   <div class="container mx-auto flex justify-between py-4 px-6">
     
-    <!-- Nombre a la izquierda -->
-    <a href="#inicio" class="text-gray-800 text-xl font-bold tracking-wide hover:text-blue-600 transition-all">
+    <!-- Nombre a la izquierda con efecto especial -->
+    <a href="#inicio" class="text-gray-800 text-2xl font-bold tracking-wide hover:text-blue-600 transition-all duration-300 relative group">
       InflvxDev
+      <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
     </a>
 
-    <!-- Enlaces y toggle -->
-    <div class="flex items-center space-x-6">
-      <ul class="flex space-x-6">
+    <!-- Enlaces con efectos mejorados -->
+    <div class="flex items-center space-x-8">
+      <ul class="flex space-x-8">
         {links.map((link, index) => (
           <li class="relative">
             <a
               href={link.path}
-              class="text-gray-700 hover:text-blue-600 transition-all font-semibold text-lg tracking-wide px-3 py-2 rounded-lg"
+              class="text-gray-700 hover:text-blue-600 transition-all duration-300 font-semibold text-lg tracking-wide px-4 py-2 rounded-lg relative group"
             >
               {link.name}
+              <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
             </a>
             {index < links.length - 1 && (
-              <span class="absolute right-[-12px] top-1/2 transform -translate-y-1/2 w-[2px] h-4 bg-gray-400/40"></span>
+              <span class="absolute right-[-16px] top-1/2 transform -translate-y-1/2 w-[1px] h-6 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></span>
             )}
           </li>
         ))}
       </ul>
-      
     </div>
+  </div>
+  
+  <!-- Línea animada debajo del navbar -->
+  <div class="h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
   </div>
 </nav>
 
+<style>
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+</style>
+
 <script is:inline>
+  // Efecto de cambio de navbar al hacer scroll
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('bg-white/95', 'shadow-xl');
+    } else {
+      navbar.classList.remove('bg-white/95', 'shadow-xl');
+    }
+  });
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       e.preventDefault();

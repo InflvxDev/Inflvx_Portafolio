@@ -5,51 +5,104 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 <section
   id="inicio"
   class="relative min-h-screen flex items-center justify-center px-12 md:px-24 lg:px-32 py-20 
-         bg-gradient-to-br from-blue-50 via-white to-gray-100"
+         bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden"
 >
-  <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+  <!-- Decoraciones de fondo -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Ondas azules decorativas -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-blue-200/30 rounded-full blur-xl animate-pulse"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-blue-300/20 rounded-full blur-lg animate-pulse delay-1000"></div>
+    <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-blue-400/15 rounded-full blur-2xl animate-pulse delay-500"></div>
     
-    <!-- Columna 1: Avatar con efecto glassmorphism -->
+    <!-- Líneas decorativas -->
+    <div class="absolute top-1/4 right-1/3 w-1 h-32 bg-gradient-to-b from-blue-400/50 to-transparent"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-1 h-24 bg-gradient-to-b from-transparent to-blue-500/50"></div>
+    
+    <!-- Puntos decorativos -->
+    <div class="absolute top-1/3 left-1/6 w-2 h-2 bg-blue-500/60 rounded-full animate-bounce"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-blue-600/70 rounded-full animate-bounce delay-700"></div>
+  </div>
+
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-20 relative z-10">
+    
+    <!-- Columna 1: Avatar con marco animado -->
     <div class="w-full md:w-1/2 flex justify-center">
-      <div class="relative rounded-full overflow-hidden p-2 
-                  bg-white/50 backdrop-blur-md shadow-2xl">
-        <img
-          src={avatarUrl}
-          alt="Avatar"
-          class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-lg 
-                 transition-transform duration-300 hover:scale-105"
-        />
+      <div class="relative">
+        <!-- Marco exterior animado -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 p-1 animate-spin-slow">
+          <div class="w-full h-full rounded-full bg-white"></div>
+        </div>
+        
+        <!-- Marco interior con glow -->
+        <div class="relative rounded-full p-3 bg-gradient-to-r from-blue-500/20 to-blue-700/20 backdrop-blur-md shadow-2xl">
+          <img
+            src={avatarUrl}
+            alt="Avatar"
+            class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-xl 
+                   transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+          />
+        </div>
+        
+        <!-- Efecto de brillo -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine"></div>
       </div>
     </div>
 
-    <!-- Columna 2: Texto con animación fade-in -->
-    <div class="w-full md:w-1/2 text-center md:text-left animate-fadeIn">
-      <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight">
-        {title}
-      </h1>
-      <p class="text-lg md:text-xl text-gray-600 mt-4 leading-relaxed">
-        {subtitle}
-      </p>
+    <!-- Columna 2: Texto con animaciones mejoradas -->
+    <div class="w-full md:w-1/2 text-center md:text-left space-y-6">
+      <!-- Saludo animado -->
+      <div class="animate-fadeInUp">
+        <span class="text-2xl md:text-3xl font-medium text-blue-600 mb-2 block">
+          ¡Hola! Soy
+        </span>
+      </div>
       
-      <!-- Botón con efecto glassmorphism -->
-      <a
-        href="#contacto"
-        class="inline-block mt-6 px-8 py-3 text-lg font-semibold text-white 
-               bg-blue-600 rounded-full shadow-lg transition-all duration-300 transform 
-               hover:scale-105 hover:bg-blue-700 hover:shadow-xl"
-      >
-        {buttonText}
-      </a>      
+      <!-- Título principal -->
+      <div class="animate-fadeInUp delay-200">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-gray-800 leading-tight relative">
+          {title}
+          <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full"></span>
+        </h1>
+      </div>
+      
+      <!-- Subtítulo -->
+      <div class="animate-fadeInUp delay-400">
+        <p class="text-xl md:text-2xl text-gray-600 mt-6 leading-relaxed font-medium">
+          {subtitle}
+        </p>
+      </div>
+      
+      <!-- Botón principal mejorado -->
+      <div class="animate-fadeInUp delay-600 pt-4">
+        <a
+          href="#proyectos"
+          class="inline-block px-10 py-4 text-lg font-bold text-white 
+                 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full 
+                 shadow-lg transition-all duration-300 transform 
+                 hover:scale-105 hover:shadow-2xl hover:from-blue-700 hover:to-blue-800
+                 relative overflow-hidden group"
+        >
+          <span class="relative z-10">{buttonText}</span>
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </a>
+      </div>
+      
+      <!-- Indicador de scroll -->
+      <div class="animate-bounce pt-8">
+        <div class="w-6 h-10 border-2 border-blue-400 rounded-full mx-auto flex justify-center">
+          <div class="w-1 h-3 bg-blue-600 rounded-full mt-2 animate-pulse"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Animaciones -->
+<!-- Animaciones mejoradas -->
 <style>
-  @keyframes fadeIn {
+  @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
@@ -57,8 +110,47 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     }
   }
 
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-out;
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-fadeInUp.delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-fadeInUp.delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-fadeInUp.delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  .animate-shine {
+    animation: shine 3s ease-in-out infinite;
   }
 </style>
 
