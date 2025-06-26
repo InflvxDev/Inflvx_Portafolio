@@ -189,13 +189,13 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     gainNode.connect(audioContext.destination);
     
     oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.1);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.05);
     
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    gainNode.gain.setValueAtTime(0.8, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
     
     oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    oscillator.stop(audioContext.currentTime + 0.05);
   }
 
   const egg = document.getElementById('minecraft-easteregg');
@@ -224,7 +224,8 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
           block.style.top = (y * blockH) + 'px';
           block.style.background = `url('/eastereggs/minecraftdirt.webp') center/cover no-repeat`;
           block.style.opacity = '1';
-          block.style.transition = 'opacity 0.15s';
+          block.style.transform = 'scale(1)';
+          block.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
           block.style.pointerEvents = 'none';
           overlay.appendChild(block);
         }
@@ -235,20 +236,31 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       console.log('Total de bloques creados:', total);
       function animateBlock() {
         if (i < total && blocks[i]) {
+          // Mejorar la animación visual
           blocks[i].style.opacity = '0';
-          // Reproducir sonido de romper tierra
-          try {
-            createMinecraftSound();
-          } catch (e) {
-            console.log('Error reproduciendo sonido:', e);
+          blocks[i].style.transform = 'scale(0.8)';
+          
+          // Reproducir sonido de romper tierra (solo cada 3 bloques para evitar saturación)
+          if (i % 3 === 0) {
+            try {
+              createMinecraftSound();
+            } catch (e) {
+              console.log('Error reproduciendo sonido:', e);
+            }
           }
-          setTimeout(() => { if (blocks[i]) blocks[i].style.display = 'none'; }, 160);
+          
+          setTimeout(() => { 
+            if (blocks[i]) {
+              blocks[i].style.display = 'none';
+            }
+          }, 200);
+          
           if (i % 20 === 0) console.log('Animando bloque', i);
           i++;
-          setTimeout(animateBlock, 10);
+          setTimeout(animateBlock, 15); // Aumentar delay para mejor visualización
         } else {
           console.log('Animación terminada.');
-          setTimeout(() => { overlay.style.display = 'none'; }, 500);
+          setTimeout(() => { overlay.style.display = 'none'; }, 300);
         }
       }
       animateBlock();
