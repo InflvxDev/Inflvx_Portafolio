@@ -93,8 +93,16 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
           <div class="w-1 h-3 bg-blue-600 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
+      
     </div>
   </div>
+
+  <div id="minecraft-easteregg" class="fixed bottom-6 left-6 z-50 group cursor-pointer" style="width:32px;height:32px;">
+    <img src="/eastereggs/minecraft-grass-block.svg" alt="Bloque de pasto Minecraft" class="transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" style="width:32px;height:32px;" />
+    <span class="absolute left-10 bottom-2 bg-gray-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">¡Minecraft!</span>
+  </div>
+
+  <div id="minecraft-overlay" style="display:none; position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:transparent;pointer-events:none;"></div>
 </section>
 
 <!-- Animaciones mejoradas -->
@@ -170,4 +178,80 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       }
     });
   });
+
+  // Función para crear sonido de romper tierra de Minecraft
+  function createMinecraftSound() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  }
+
+  const egg = document.getElementById('minecraft-easteregg');
+  const overlay = document.getElementById('minecraft-overlay');
+  if (egg && overlay) {
+    egg.onclick = () => {
+      console.log('Easter egg click detectado');
+      // Configuración de la cuadrícula
+      const cols = 20;
+      const rows = 12;
+      const blockW = Math.ceil(window.innerWidth / cols);
+      const blockH = Math.ceil(window.innerHeight / rows);
+      overlay.innerHTML = '';
+      overlay.style.display = 'block';
+      overlay.style.background = 'transparent';
+      overlay.style.pointerEvents = 'all';
+      console.log('Overlay mostrado, creando bloques...');
+      // Crear bloques
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const block = document.createElement('div');
+          block.style.position = 'absolute';
+          block.style.width = blockW + 'px';
+          block.style.height = blockH + 'px';
+          block.style.left = (x * blockW) + 'px';
+          block.style.top = (y * blockH) + 'px';
+          block.style.background = `url('/eastereggs/minecraftdirt.webp') center/cover no-repeat`;
+          block.style.opacity = '1';
+          block.style.transition = 'opacity 0.15s';
+          block.style.pointerEvents = 'none';
+          overlay.appendChild(block);
+        }
+      }
+      let i = 0;
+      const blocks = Array.from(overlay.children);
+      const total = blocks.length;
+      console.log('Total de bloques creados:', total);
+      function animateBlock() {
+        if (i < total && blocks[i]) {
+          blocks[i].style.opacity = '0';
+          // Reproducir sonido de romper tierra
+          try {
+            createMinecraftSound();
+          } catch (e) {
+            console.log('Error reproduciendo sonido:', e);
+          }
+          setTimeout(() => { if (blocks[i]) blocks[i].style.display = 'none'; }, 160);
+          if (i % 20 === 0) console.log('Animando bloque', i);
+          i++;
+          setTimeout(animateBlock, 10);
+        } else {
+          console.log('Animación terminada.');
+          setTimeout(() => { overlay.style.display = 'none'; }, 500);
+        }
+      }
+      animateBlock();
+    };
+  }
 </script>
