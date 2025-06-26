@@ -179,9 +179,13 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     });
   });
 
+  let audioContext = null;
+  let isAnimating = false;
+
   // Función para crear sonido de romper tierra de Minecraft
   function createMinecraftSound() {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioContext || !isAnimating) return;
+    
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     
@@ -203,6 +207,16 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   if (egg && overlay) {
     egg.onclick = () => {
       console.log('Easter egg click detectado');
+      
+      // Inicializar o reactivar audio context
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      } else if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      
+      isAnimating = true;
+      
       // Configuración de la cuadrícula
       const cols = 20;
       const rows = 12;
@@ -213,6 +227,7 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       overlay.style.background = 'transparent';
       overlay.style.pointerEvents = 'all';
       console.log('Overlay mostrado, creando bloques...');
+      
       // Crear bloques
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
@@ -230,12 +245,14 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
           overlay.appendChild(block);
         }
       }
+      
       let i = 0;
       const blocks = Array.from(overlay.children);
       const total = blocks.length;
       console.log('Total de bloques creados:', total);
+      
       function animateBlock() {
-        if (i < total && blocks[i]) {
+        if (i < total && blocks[i] && isAnimating) {
           // Mejorar la animación visual
           blocks[i].style.opacity = '0';
           blocks[i].style.transform = 'scale(0.8)';
@@ -257,12 +274,18 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
           
           if (i % 20 === 0) console.log('Animando bloque', i);
           i++;
-          setTimeout(animateBlock, 15); // Aumentar delay para mejor visualización
+          setTimeout(animateBlock, 15);
         } else {
           console.log('Animación terminada.');
-          setTimeout(() => { overlay.style.display = 'none'; }, 300);
+          isAnimating = false; // Detener todos los sonidos
+          setTimeout(() => { 
+            overlay.style.display = 'none'; 
+            isAnimating = false; // Asegurar que esté detenido
+          }, 300);
         }
       }
+      
+      // Comenzar animación inmediatamente
       animateBlock();
     };
   }
