@@ -223,15 +223,15 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   }
 
   .tardis-materializing {
-    animation: tardis-materialize 1.5s ease-in-out forwards;
+    animation: tardis-materialize 3s ease-in-out forwards;
   }
 
   .tardis-dematerializing {
-    animation: tardis-dematerialize 1.5s ease-in-out forwards;
+    animation: tardis-dematerialize 3s ease-in-out forwards;
   }
 
   .vortex-effect {
-    animation: vortex 2s ease-in-out infinite;
+    animation: vortex 4s ease-in-out infinite;
   }
 </style>
 
@@ -442,15 +442,14 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
           setRandomTardisPosition();
           tardisEgg.classList.remove('tardis-dematerializing');
           tardisEgg.classList.add('tardis-materializing');
-          playTardisSound();
           setTimeout(() => {
             tardisEgg.style.opacity = '1';
             tardisEgg.style.pointerEvents = 'auto';
             tardisEgg.classList.remove('tardis-materializing');
             isTardisAnimating = false;
-          }, 1500);
-        }, 2000);
-      }, 1500);
+          }, 3000); // materialización 3s
+        }, 4000); // vortex 4s
+      }, 3000); // dematerialización 3s
     };
   }
 </script>
