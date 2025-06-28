@@ -1,8 +1,8 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Cuerpo principal, más alto y delgado, centrado -->
-  <rect x="13" y="4" width="14" height="32" rx="2.5" fill="#1976D2"/>
+<svg width="40" height="40" viewBox="0 0 14 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cuerpo principal, ocupa todo el SVG -->
+  <rect x="0" y="4" width="14" height="32" rx="2.5" fill="#1976D2"/>
   <!-- Luz superior amarilla -->
-  <rect x="17" y="0.5" width="6" height="6" rx="2" fill="#FFEB3B"/>
+  <rect x="4" y="0.5" width="6" height="6" rx="2" fill="#FFEB3B"/>
   <!-- Ventana central -->
-  <rect x="15" y="10" width="10" height="14" rx="1.5" fill="#1565C0"/>
+  <rect x="2" y="10" width="10" height="14" rx="1.5" fill="#1565C0"/>
 </svg> 

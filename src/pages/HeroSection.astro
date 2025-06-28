@@ -387,15 +387,6 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   // Funcionalidad de la TARDIS
   let tardisAudioContext = null;
   let isTardisAnimating = false;
-  let tardisPositions = [
-    { x: 'bottom-6', y: 'right-6' },
-    { x: 'top-6', y: 'left-6' },
-    { x: 'top-1/2', y: 'left-1/4' },
-    { x: 'bottom-1/4', y: 'right-1/3' },
-    { x: 'top-1/3', y: 'right-1/4' },
-    { x: 'bottom-1/3', y: 'left-1/3' }
-  ];
-  let currentTardisPosition = 0;
 
   // Función para crear sonido de materialización de la TARDIS
   function createTardisSound(type = 'materialize') {
@@ -441,85 +432,54 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 
   const tardisEgg = document.getElementById('tardis-easteregg');
   if (tardisEgg) {
+    // Inicializar posición random al cargar
+    tardisEgg.style.position = 'fixed';
+    tardisEgg.style.width = '40px';
+    tardisEgg.style.height = '40px';
+    function setRandomTardisPosition() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const sizeW = 40;
+      const sizeH = 40;
+      // Dejar margen de 10px para que no se salga
+      const left = Math.random() * (vw - sizeW - 20) + 10;
+      const top = Math.random() * (vh - sizeH - 20) + 10;
+      tardisEgg.style.left = `${left}px`;
+      tardisEgg.style.top = `${top}px`;
+    }
+    setRandomTardisPosition();
+
     tardisEgg.onclick = () => {
-      console.log('TARDIS easter egg click detectado');
-      
       if (isTardisAnimating) return;
-      
-      // Inicializar o reactivar audio context
       if (!tardisAudioContext) {
         tardisAudioContext = new (window.AudioContext || window.webkitAudioContext)();
       } else if (tardisAudioContext.state === 'suspended') {
         tardisAudioContext.resume();
       }
-      
       isTardisAnimating = true;
-      
-      // Efecto de desmaterialización
       tardisEgg.classList.add('tardis-dematerializing');
       createTardisSound('dematerialize');
-      
       setTimeout(() => {
-        // Ocultar TARDIS pero mantener la imagen
         tardisEgg.style.opacity = '0';
         tardisEgg.style.pointerEvents = 'none';
-        
-        // Crear efecto de vortex (sin círculos azules)
         createVortexEffect();
-        
         setTimeout(() => {
-          // Cambiar posición
-          currentTardisPosition = (currentTardisPosition + 1) % tardisPositions.length;
-          const newPos = tardisPositions[currentTardisPosition];
-          
-          // Actualizar posición manteniendo la estructura HTML
-          tardisEgg.className = `fixed ${newPos.x} ${newPos.y} z-50 group cursor-pointer`;
-          tardisEgg.style.width = '40px';
-          tardisEgg.style.height = '40px';
-          
-          // Asegurar que la imagen esté presente
-          const tardisImg = tardisEgg.querySelector('img');
-          if (!tardisImg) {
-            const img = document.createElement('img');
-            img.src = '/eastereggs/doctorwho-tardis.svg';
-            img.alt = 'TARDIS Doctor Who';
-            img.className = 'transition-all duration-300 group-hover:scale-110 group-hover:rotate-3';
-            img.style.width = '40px';
-            img.style.height = '40px';
-            tardisEgg.appendChild(img);
-          }
-          
-          // Asegurar que el tooltip esté presente
-          const tooltip = tardisEgg.querySelector('span');
-          if (!tooltip) {
-            const span = document.createElement('span');
-            span.className = 'absolute right-10 bottom-2 bg-blue-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg';
-            span.textContent = 'Time and Relative Dimension in Space';
-            tardisEgg.appendChild(span);
-          }
-          
-          // Efecto de materialización
+          // Posición aleatoria
+          setRandomTardisPosition();
           tardisEgg.classList.remove('tardis-dematerializing');
           tardisEgg.classList.add('tardis-materializing');
           createTardisSound('materialize');
-          
           setTimeout(() => {
-            // Mostrar TARDIS en nueva posición
             tardisEgg.style.opacity = '1';
             tardisEgg.style.pointerEvents = 'auto';
             tardisEgg.classList.remove('tardis-materializing');
             isTardisAnimating = false;
-            
-            // Efecto de brillo temporal
             tardisEgg.classList.add('tardis-glow');
             setTimeout(() => {
               tardisEgg.classList.remove('tardis-glow');
             }, 2000);
-            
           }, 1500);
-          
         }, 2000);
-        
       }, 1500);
     };
   }
