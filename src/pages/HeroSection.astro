@@ -103,7 +103,7 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   </div>
 
   <!-- Easter Egg de la TARDIS -->
-  <div id="tardis-easteregg" class="fixed bottom-6 right-6 z-50 group cursor-pointer" style="width:40px;height:40px;">
+  <div id="tardis-easteregg" class="fixed z-50 group cursor-pointer" style="width:40px;height:40px;">
     <img src="/eastereggs/doctorwho-tardis.svg" alt="TARDIS Doctor Who" class="transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" style="width:40px;height:40px;" />
     <span class="absolute right-10 bottom-2 bg-blue-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">Time and Relative Dimension in Space</span>
   </div>
@@ -171,67 +171,35 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   }
 
   /* Animaciones para la TARDIS */
-  @keyframes tardis-materialize {
-    0% {
-      opacity: 0;
-      transform: scale(0.1) rotate(180deg);
-      filter: blur(10px);
-    }
-    50% {
-      opacity: 0.7;
-      transform: scale(1.2) rotate(90deg);
-      filter: blur(5px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-      filter: blur(0px);
-    }
+  @keyframes tardis-blink-out {
+    0% { opacity: 1; }
+    10% { opacity: 0; }
+    20% { opacity: 1; }
+    30% { opacity: 0; }
+    40% { opacity: 1; }
+    50% { opacity: 0; }
+    60% { opacity: 1; }
+    70% { opacity: 0; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
   }
-
-  @keyframes tardis-dematerialize {
-    0% {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-      filter: blur(0px);
-    }
-    50% {
-      opacity: 0.7;
-      transform: scale(1.2) rotate(-90deg);
-      filter: blur(5px);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.1) rotate(-180deg);
-      filter: blur(10px);
-    }
+  @keyframes tardis-blink-in {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 0; }
+    30% { opacity: 1; }
+    40% { opacity: 0; }
+    50% { opacity: 1; }
+    60% { opacity: 0; }
+    70% { opacity: 1; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
   }
-
-  @keyframes vortex {
-    0% {
-      transform: rotate(0deg) scale(0);
-      opacity: 0;
-    }
-    50% {
-      transform: rotate(180deg) scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: rotate(360deg) scale(2);
-      opacity: 0;
-    }
-  }
-
   .tardis-materializing {
-    animation: tardis-materialize 3s ease-in-out forwards;
+    animation: tardis-blink-in 3s linear forwards;
   }
-
   .tardis-dematerializing {
-    animation: tardis-dematerialize 3s ease-in-out forwards;
-  }
-
-  .vortex-effect {
-    animation: vortex 4s ease-in-out infinite;
+    animation: tardis-blink-out 3s linear forwards;
   }
 </style>
 
