@@ -222,15 +222,6 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     }
   }
 
-  @keyframes tardis-glow {
-    0%, 100% {
-      box-shadow: 0 0 5px #0066cc, 0 0 10px #0066cc, 0 0 15px #0066cc;
-    }
-    50% {
-      box-shadow: 0 0 10px #0066cc, 0 0 20px #0066cc, 0 0 30px #0066cc;
-    }
-  }
-
   .tardis-materializing {
     animation: tardis-materialize 1.5s ease-in-out forwards;
   }
@@ -241,10 +232,6 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 
   .vortex-effect {
     animation: vortex 2s ease-in-out infinite;
-  }
-
-  .tardis-glow {
-    animation: tardis-glow 2s ease-in-out infinite;
   }
 </style>
 
@@ -388,31 +375,18 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
   let tardisAudioContext = null;
   let isTardisAnimating = false;
 
-  // Función para crear sonido de materialización de la TARDIS
-  function createTardisSound(type = 'materialize') {
-    if (!tardisAudioContext || !isTardisAnimating) return;
-    
-    const oscillator = tardisAudioContext.createOscillator();
-    const gainNode = tardisAudioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(tardisAudioContext.destination);
-    
-    if (type === 'materialize') {
-      // Sonido ascendente para materialización
-      oscillator.frequency.setValueAtTime(200, tardisAudioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(800, tardisAudioContext.currentTime + 1.5);
-    } else {
-      // Sonido descendente para desmaterialización
-      oscillator.frequency.setValueAtTime(800, tardisAudioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(200, tardisAudioContext.currentTime + 1.5);
+  // Reemplazar sonido generado por audio real
+  let tardisAudio = new Audio('/eastereggs/tardis_sound.mp3');
+  tardisAudio.volume = 0.7;
+
+  function playTardisSound() {
+    try {
+      tardisAudio.pause();
+      tardisAudio.currentTime = 0;
+      tardisAudio.play();
+    } catch (e) {
+      // Puede fallar si el usuario no ha interactuado aún
     }
-    
-    gainNode.gain.setValueAtTime(0.3, tardisAudioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, tardisAudioContext.currentTime + 1.5);
-    
-    oscillator.start(tardisAudioContext.currentTime);
-    oscillator.stop(tardisAudioContext.currentTime + 1.5);
   }
 
   // Función para crear efecto de vortex
@@ -432,10 +406,15 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 
   const tardisEgg = document.getElementById('tardis-easteregg');
   if (tardisEgg) {
-    // Inicializar posición random al cargar
+    // Posición inicial: esquina inferior derecha
     tardisEgg.style.position = 'fixed';
     tardisEgg.style.width = '40px';
     tardisEgg.style.height = '40px';
+    tardisEgg.style.right = '24px';
+    tardisEgg.style.bottom = '24px';
+    // Elimina cualquier left/top inicial
+    tardisEgg.style.left = '';
+    tardisEgg.style.top = '';
     function setRandomTardisPosition() {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
@@ -446,38 +425,29 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       const top = Math.random() * (vh - sizeH - 20) + 10;
       tardisEgg.style.left = `${left}px`;
       tardisEgg.style.top = `${top}px`;
+      tardisEgg.style.right = '';
+      tardisEgg.style.bottom = '';
     }
-    setRandomTardisPosition();
 
     tardisEgg.onclick = () => {
       if (isTardisAnimating) return;
-      if (!tardisAudioContext) {
-        tardisAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-      } else if (tardisAudioContext.state === 'suspended') {
-        tardisAudioContext.resume();
-      }
       isTardisAnimating = true;
       tardisEgg.classList.add('tardis-dematerializing');
-      createTardisSound('dematerialize');
+      playTardisSound();
       setTimeout(() => {
         tardisEgg.style.opacity = '0';
         tardisEgg.style.pointerEvents = 'none';
         createVortexEffect();
         setTimeout(() => {
-          // Posición aleatoria
           setRandomTardisPosition();
           tardisEgg.classList.remove('tardis-dematerializing');
           tardisEgg.classList.add('tardis-materializing');
-          createTardisSound('materialize');
+          playTardisSound();
           setTimeout(() => {
             tardisEgg.style.opacity = '1';
             tardisEgg.style.pointerEvents = 'auto';
             tardisEgg.classList.remove('tardis-materializing');
             isTardisAnimating = false;
-            tardisEgg.classList.add('tardis-glow');
-            setTimeout(() => {
-              tardisEgg.classList.remove('tardis-glow');
-            }, 2000);
           }, 1500);
         }, 2000);
       }, 1500);
