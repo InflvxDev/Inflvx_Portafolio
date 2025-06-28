@@ -217,27 +217,35 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       
       isAnimating = true;
       
-      // Configuración de la cuadrícula
-      const cols = 20;
-      const rows = 12;
-      const blockW = Math.ceil(window.innerWidth / cols);
-      const blockH = Math.ceil(window.innerHeight / rows);
+      // Configuración de la cuadrícula adaptativa para móviles con bloques cuadrados
+      const isMobile = window.innerWidth <= 768;
+      const cols = isMobile ? 12 : 20;
+      const rows = isMobile ? 8 : 12;
+      // Calcular el tamaño del bloque cuadrado
+      const blockSize = Math.min(
+        Math.floor(window.innerWidth / cols),
+        Math.floor(window.innerHeight / rows)
+      );
+      // Recalcular el número de columnas y filas para cubrir toda la pantalla
+      const realCols = Math.ceil(window.innerWidth / blockSize);
+      const realRows = Math.ceil(window.innerHeight / blockSize);
       overlay.innerHTML = '';
       overlay.style.display = 'block';
       overlay.style.background = 'transparent';
       overlay.style.pointerEvents = 'all';
-      console.log('Overlay mostrado, creando bloques...');
+      console.log('Overlay mostrado, creando bloques cuadrados...', { realCols, realRows, blockSize, isMobile });
       
-      // Crear bloques
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
+      // Crear bloques cuadrados
+      for (let y = 0; y < realRows; y++) {
+        for (let x = 0; x < realCols; x++) {
           const block = document.createElement('div');
           block.style.position = 'absolute';
-          block.style.width = blockW + 'px';
-          block.style.height = blockH + 'px';
-          block.style.left = (x * blockW) + 'px';
-          block.style.top = (y * blockH) + 'px';
-          block.style.background = `url('/eastereggs/minecraftdirt.webp') center/cover no-repeat`;
+          block.style.width = blockSize + 'px';
+          block.style.height = blockSize + 'px';
+          block.style.left = (x * blockSize) + 'px';
+          block.style.top = (y * blockSize) + 'px';
+          block.style.background = `url('/eastereggs/minecraftdirt.webp') repeat`;
+          block.style.backgroundSize = `${blockSize}px ${blockSize}px`;
           block.style.opacity = '1';
           block.style.transform = 'scale(1)';
           block.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
