@@ -1,48 +1,162 @@
-# Astro Starter Kit: Basics
+# InflvxDev Portfolio
 
-```sh
-npm create astro@latest -- --template basics
+A modern, responsive personal portfolio website built with **Astro** and **Tailwind CSS**. Showcasing professional experience, projects, and contact information with an elegant design and smooth animations.
+
+## Overview
+
+This is a professional portfolio for **Sebastian Ochoa Rangel (InflvxDev)**, a Systems Engineer, Developer, and Data Analyst. The portfolio features a modern interface displaying professional experience, completed projects with image carousels, and contact capabilities.
+
+## Tech Stack
+
+- **Framework**: [Astro](https://astro.build) 5.16.0
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) 4.1.10 with Vite integration
+- **Language**: JavaScript/HTML
+- **Package Manager**: pnpm
+
+## Features
+
+- **Responsive Design**: Mobile-first approach with desktop optimization using Tailwind CSS
+- **Hero Section**: Animated introduction with avatar, title, subtitle, and call-to-action button
+- **Navigation Bar**: Fixed navigation with smooth animations, desktop links, and mobile hamburger menu
+- **Experience Section**: Professional experience timeline with technologies and key achievements
+- **Project Portfolio**: 9+ projects displayed as cards with:
+  - Image carousels with navigation controls
+  - Project descriptions and technology tags
+  - Links to repositories where available
+- **Contact Section**: Integration for contact inquiries
+- **Animated Footer**: Gradient design with decorative elements
+- **Easter Egg**: Minecraft-themed easter egg (fixed position element)
+- **Dark Mode Support**: Tailwind CSS class-based dark mode configuration
+- **Animations**: 
+  - Fade-in effects on scroll
+  - Hovering and interactive transitions
+  - Animated decorative elements (pulsing, bouncing, shimmer effects)
+
+## Project Highlights
+
+The portfolio showcases diverse projects including:
+
+- **OHI BloodShoot & HOKOKU**: Healthcare management platforms (Astro, React, Supabase, SQL Server)
+- **Selenium ChatBot**: WhatsApp automation for medical appointment reminders (Python, Selenium)
+- **ASMUYCAVA App**: Mobile coffee traceability app (Flutter, Supabase, Dart)
+- **Gneis AppWeb**: Hotel room management system (Angular, .NET, Supabase)
+- **Eotia Cake**: Bakery product management app (Java, Spring Boot)
+- **Minecraft Datapacks**: Three custom datapacks with mob variants and gameplay modifications
+
+## Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
+├── public/                 # Static assets
+│   ├── eastereggs/        # Easter egg resources
+│   ├── images/            # Avatar and general images
+│   └── projects/          # Project preview images
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/            # Local assets
+│   ├── components/        # Reusable components
+│   │   ├── NavBar.astro   # Fixed navigation with mobile menu
+│   │   └── ProjectCard.astro  # Project card with image carousel
+│   ├── data/              # Static data
+│   │   ├── experience.js  # Experience timeline data
+│   │   └── projects.js    # Project portfolio data
+│   ├── layouts/           # Page layouts
+│   │   └── Layout.astro   # Main layout with header and footer
+│   ├── pages/             # Page components
+│   │   ├── index.astro    # Main portfolio page
+│   │   ├── HeroSection.astro
+│   │   ├── ExperienceSection.astro
+│   │   ├── ProjectSection.astro
+│   │   └── ContactSection.astro
+│   └── styles/            # Global styles
+│       └── global.css
+├── astro.config.mjs       # Astro configuration with Tailwind integration
+├── tailwind.config.js     # Tailwind CSS configuration
+├── tsconfig.json          # TypeScript configuration
+└── package.json           # Project dependencies and scripts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Getting Started
 
-## 🧞 Commands
+### Prerequisites
 
-All commands are run from the root of the project, from a terminal:
+- Node.js 18+ installed
+- pnpm package manager
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Installation
 
-## 👀 Want to learn more?
+1. Clone or download the project
+2. Install dependencies:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+pnpm install
+```
+
+### Development
+
+Start the local development server at `http://localhost:4321`:
+
+```bash
+pnpm run dev
+```
+
+### Build
+
+Create a production build:
+
+```bash
+pnpm run build
+```
+
+### Preview
+
+Preview the production build locally:
+
+```bash
+pnpm run preview
+```
+
+### Astro CLI
+
+Run additional Astro commands:
+
+```bash
+pnpm run astro
+```
+
+For Astro CLI help:
+
+```bash
+pnpm run astro -- --help
+```
+
+## Customization
+
+### Update Experience Data
+
+Edit `src/data/experience.js` to add or modify professional experience entries. Each entry includes:
+- Company name and position
+- Period (start/end dates)
+- Description
+- Technologies used
+- Key achievements
+
+### Update Projects Data
+
+Edit `src/data/projects.js` to add or modify portfolio projects. Each project includes:
+- Title and description
+- Technology tags
+- Image carousel images
+- Optional repository link
+
+### Styling
+
+- Global styles: `src/styles/global.css`
+- Tailwind configuration: `tailwind.config.js`
+- Dark mode is supported via CSS class (`darkMode: 'class'`)
+
+## License
+
+This project is the personal portfolio of Sebastian Ochoa Rangel (InflvxDev).
+
+## Contact
+
+For inquiries or collaboration opportunities, use the contact section on the portfolio website.
