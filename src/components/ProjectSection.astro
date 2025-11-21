@@ -23,22 +23,22 @@ const safeProjects = Array.isArray(projects) ? projects.filter(project =>
 <section
   id="proyectos"
   class="relative py-32 px-6 md:px-16 lg:px-24 
-         bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden"
+         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
 >
   <!-- Decoraciones de fondo -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <!-- Formas geométricas decorativas -->
-    <div class="absolute top-20 right-10 w-24 h-24 bg-blue-200/20 rounded-full blur-xl"></div>
-    <div class="absolute bottom-20 left-10 w-32 h-32 bg-blue-300/15 rounded-full blur-2xl"></div>
-    <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/10 rounded-full blur-lg"></div>
+    <div class="absolute top-20 right-10 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
+    <div class="absolute bottom-20 left-10 w-32 h-32 bg-primary/15 rounded-full blur-2xl"></div>
+    <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/10 rounded-full blur-lg"></div>
     
     <!-- Líneas decorativas -->
-    <div class="absolute top-1/3 left-0 w-1 h-40 bg-gradient-to-b from-blue-400/30 to-transparent"></div>
-    <div class="absolute bottom-1/3 right-0 w-1 h-32 bg-gradient-to-b from-transparent to-blue-500/30"></div>
+    <div class="absolute top-1/3 left-0 w-1 h-40 bg-gradient-to-b from-primary/30 to-transparent"></div>
+    <div class="absolute bottom-1/3 right-0 w-1 h-32 bg-gradient-to-b from-transparent to-foreground/30"></div>
     
     <!-- Puntos decorativos -->
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-blue-500/40 rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-blue-600/50 rounded-full animate-pulse delay-1000"></div>
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-foreground/50 rounded-full animate-pulse delay-1000"></div>
   </div>
 
   <div class="container mx-auto max-w-7xl relative z-10">
@@ -46,17 +46,17 @@ const safeProjects = Array.isArray(projects) ? projects.filter(project =>
     <!-- Título con efectos especiales -->
     <div class="text-center mb-20">
       <div class="inline-block relative">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-800 relative z-10">
+        <h2 class="text-5xl md:text-6xl font-bold text-foreground relative z-10">
           Mis Proyectos
         </h2>
         <!-- Subrayado animado -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 rounded-full"></div>
+        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-primary via-foreground to-primary rounded-full"></div>
         <!-- Efecto de brillo -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full animate-shimmer"></div>
+        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-background/30 to-transparent rounded-full animate-shimmer"></div>
       </div>
       
       <!-- Subtítulo descriptivo -->
-      <p class="text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-xl text-foreground/70 mt-6 max-w-2xl mx-auto leading-relaxed">
         Una colección de proyectos que demuestran mi pasión por la tecnología y la innovación
       </p>
     </div>
@@ -75,16 +75,16 @@ const safeProjects = Array.isArray(projects) ? projects.filter(project =>
       </div>
     ) : (
       <div class="text-center py-20">
-        <div class="inline-block p-8 bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="inline-block p-8 bg-background/60 backdrop-blur-lg rounded-2xl shadow-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
             </svg>
           </div>
-          <p class="text-xl text-gray-700 font-medium mb-2">
+          <p class="text-xl text-foreground font-medium mb-2">
             No hay proyectos disponibles en este momento
           </p>
-          <p class="text-gray-500">
+          <p class="text-foreground/60">
             Pronto agregaré nuevos proyectos increíbles
           </p>
         </div>

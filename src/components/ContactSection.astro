@@ -25,42 +25,42 @@ const socialLinks: SocialLink[] = [
 ];
 ---
 
-<section id="contacto" class="relative py-32 px-8 md:px-16 lg:px-24 bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden">
+<section id="contacto" class="relative py-32 px-8 md:px-16 lg:px-24 bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden">
   <!-- Decoraciones de fondo -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <!-- Formas geométricas decorativas -->
-    <div class="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-20 right-10 w-24 h-24 bg-blue-300/15 rounded-full blur-xl"></div>
-    <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-blue-400/10 rounded-full blur-lg"></div>
+    <div class="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-20 right-10 w-24 h-24 bg-primary/15 rounded-full blur-xl"></div>
+    <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-primary/10 rounded-full blur-lg"></div>
     
     <!-- Líneas decorativas -->
-    <div class="absolute top-1/3 right-0 w-1 h-40 bg-gradient-to-b from-blue-400/30 to-transparent"></div>
-    <div class="absolute bottom-1/3 left-0 w-1 h-32 bg-gradient-to-b from-transparent to-blue-500/30"></div>
+    <div class="absolute top-1/3 right-0 w-1 h-40 bg-gradient-to-b from-primary/30 to-transparent"></div>
+    <div class="absolute bottom-1/3 left-0 w-1 h-32 bg-gradient-to-b from-transparent to-foreground/30"></div>
     
     <!-- Puntos decorativos -->
-    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500/40 rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-1.5 h-1.5 bg-blue-600/50 rounded-full animate-pulse delay-1000"></div>
+    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-1.5 h-1.5 bg-foreground/50 rounded-full animate-pulse delay-1000"></div>
   </div>
 
   <div class="container mx-auto max-w-4xl text-center relative z-10">
     
     <!-- Caja principal con efecto glassmorphism mejorado -->
-    <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl p-12 md:p-16 transition-all duration-500 hover:shadow-3xl border border-blue-200/30">
+    <div class="bg-background/70 backdrop-blur-xl rounded-3xl shadow-2xl p-12 md:p-16 transition-all duration-500 hover:shadow-3xl border border-primary/30">
       
       <!-- Icono decorativo -->
-      <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="w-20 h-20 bg-gradient-to-r from-foreground to-primary rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
+        <svg class="w-10 h-10 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
         </svg>
       </div>
       
       <!-- Título con efectos especiales -->
       <div class="mb-8">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4 relative">
+        <h2 class="text-5xl md:text-6xl font-bold text-foreground mb-4 relative">
           ¡Hablemos!
-          <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></span>
+          <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary to-foreground rounded-full"></span>
         </h2>
-        <p class="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+        <p class="text-xl md:text-2xl text-foreground/70 leading-relaxed max-w-2xl mx-auto">
           ¿Tienes un proyecto interesante o alguna consulta?  
           Contáctame a través de mis redes o envíame un mensaje.
         </p>
@@ -73,15 +73,15 @@ const socialLinks: SocialLink[] = [
             href={item.isEmail ? `mailto:${item.name}?subject=Contacto desde portafolio` : item.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center gap-4 bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:from-blue-100 hover:to-blue-200 border border-blue-200/50"
+            class="group flex items-center gap-4 bg-gradient-to-r from-primary/5 to-primary/10 px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:from-primary/10 hover:to-primary/20 border border-primary/50"
             aria-label={item.name}
             style={`animation-delay: ${index * 200}ms`}
           >
             <!-- Icono con fondo -->
-            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
+            <div class="w-12 h-12 bg-gradient-to-r from-foreground to-primary rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 text-white transition-all duration-300 group-hover:scale-110"
+                class="w-6 h-6 text-background transition-all duration-300 group-hover:scale-110"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -91,16 +91,16 @@ const socialLinks: SocialLink[] = [
             
             <!-- Texto -->
             <div class="text-left">
-              <span class="text-gray-700 font-semibold group-hover:text-blue-700 transition-colors duration-300 block break-all">
+              <span class="text-foreground font-semibold group-hover:text-primary transition-colors duration-300 block break-all">
                 {item.name}
               </span>
-              <span class="text-sm text-gray-500 group-hover:text-blue-600 transition-colors duration-300">
+              <span class="text-sm text-foreground/60 group-hover:text-primary transition-colors duration-300">
                 {item.isEmail ? 'Enviar email' : 'Visitar perfil'}
               </span>
             </div>
             
             <!-- Flecha indicadora -->
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-all duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-foreground/40 group-hover:text-primary transition-all duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </a>
@@ -108,8 +108,8 @@ const socialLinks: SocialLink[] = [
       </div>
       
       <!-- Mensaje adicional -->
-      <div class="mt-12 p-6 bg-blue-50/50 rounded-2xl border border-blue-200/30">
-        <p class="text-gray-600 font-medium">
+      <div class="mt-12 p-6 bg-primary/5 rounded-2xl border border-primary/30">
+        <p class="text-foreground/70 font-medium">
           💡 ¿Tienes una idea genial? ¡Me encantaría escucharla!
         </p>
       </div>

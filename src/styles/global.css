@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
-
-
 body {
   font-family: 'Inter', sans-serif;
 }
 
 
+:root {
+  --background: #f9f9f9;
+  --foreground: #003365;
+  --primary: #06b6d4;
+  --secondary: #9b4d31;
+}
+
+/* Mapeo a Tailwind */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+}

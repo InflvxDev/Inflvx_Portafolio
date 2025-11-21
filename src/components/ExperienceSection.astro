@@ -30,22 +30,22 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
 <section
   id="experiencia"
   class="relative py-32 px-6 md:px-16 lg:px-24 
-         bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden"
+         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
 >
   <!-- Decoraciones de fondo -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <!-- Formas geométricas decorativas -->
-    <div class="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-20 right-10 w-24 h-24 bg-blue-300/15 rounded-full blur-xl"></div>
-    <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-blue-400/10 rounded-full blur-lg"></div>
+    <div class="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-20 right-10 w-24 h-24 bg-primary/15 rounded-full blur-xl"></div>
+    <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-primary/10 rounded-full blur-lg"></div>
     
     <!-- Líneas decorativas -->
-    <div class="absolute top-1/3 right-0 w-1 h-40 bg-gradient-to-b from-blue-400/30 to-transparent"></div>
-    <div class="absolute bottom-1/3 left-0 w-1 h-32 bg-gradient-to-b from-transparent to-blue-500/30"></div>
+    <div class="absolute top-1/3 right-0 w-1 h-40 bg-gradient-to-b from-primary/30 to-transparent"></div>
+    <div class="absolute bottom-1/3 left-0 w-1 h-32 bg-gradient-to-b from-transparent to-foreground/30"></div>
     
     <!-- Puntos decorativos -->
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-blue-500/40 rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-blue-600/50 rounded-full animate-pulse delay-1000"></div>
+    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-foreground/50 rounded-full animate-pulse delay-1000"></div>
   </div>
 
   <div class="container mx-auto max-w-6xl relative z-10">
@@ -53,17 +53,17 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
     <!-- Título con efectos especiales -->
     <div class="text-center mb-20">
       <div class="inline-block relative">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-800 relative z-10">
+        <h2 class="text-5xl md:text-6xl font-bold text-foreground relative z-10">
           Experiencia Laboral
         </h2>
         <!-- Subrayado animado -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 rounded-full"></div>
+        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-primary via-foreground to-primary rounded-full"></div>
         <!-- Efecto de brillo -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full animate-shimmer"></div>
+        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-background/30 to-transparent rounded-full animate-shimmer"></div>
       </div>
       
       <!-- Subtítulo descriptivo -->
-      <p class="text-xl text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-xl text-foreground/70 mt-6 max-w-2xl mx-auto leading-relaxed">
         Mi trayectoria profesional y las experiencias que han moldeado mi desarrollo
       </p>
     </div>
@@ -77,25 +77,25 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
             style={`animation-delay: ${index * 200}ms`}
           >
             <!-- Card de experiencia -->
-            <div class="relative bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-blue-200/30 p-8 md:p-10 group">
+            <div class="relative bg-background/70 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-primary/30 p-8 md:p-10 group">
               
               <!-- Efecto de brillo en hover -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/5 to-blue-400/0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <div class="relative z-10">
                 <!-- Header con empresa y período -->
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                   <div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                       {exp.company}
                     </h3>
-                    <p class="text-xl text-blue-600 font-semibold mt-1">
+                    <p class="text-xl text-primary font-semibold mt-1">
                       {exp.position}
                     </p>
                   </div>
                   
                   <!-- Período -->
-                  <div class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full shadow-lg">
+                  <div class="flex items-center gap-2 bg-gradient-to-r from-foreground to-primary text-background px-4 py-2 rounded-full shadow-lg">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
@@ -107,7 +107,7 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                 
                 <!-- Descripción -->
                 <div class="mb-6">
-                  <p class="text-gray-700 leading-relaxed text-lg">
+                  <p class="text-foreground/80 leading-relaxed text-lg">
                     {exp.description}
                   </p>
                 </div>
@@ -115,8 +115,8 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                 <!-- Logros -->
                 {exp.achievements && exp.achievements.length > 0 && (
                   <div class="mb-6">
-                    <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <h4 class="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
                       Logros y Responsabilidades
@@ -124,8 +124,8 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                     <ul class="space-y-2">
                       {exp.achievements.map((achievement, idx) => (
                         <li class="flex items-start gap-3">
-                          <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span class="text-gray-700">{achievement}</span>
+                          <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                          <span class="text-foreground/80">{achievement}</span>
                         </li>
                       ))}
                     </ul>
@@ -136,7 +136,7 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                 {exp.technologies && exp.technologies.length > 0 && (
                   <div class="flex flex-wrap gap-2">
                     {exp.technologies.map((tech, idx) => (
-                      <span class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-medium border border-blue-200/50 hover:bg-blue-200 transition-colors duration-300">
+                      <span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-full text-sm font-medium border border-primary/50 hover:bg-primary/20 transition-colors duration-300">
                         {tech}
                       </span>
                     ))}
@@ -145,23 +145,23 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
               </div>
               
               <!-- Efecto decorativo -->
-              <div class="absolute -top-3 left-8 w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg"></div>
+              <div class="absolute -top-3 left-8 w-6 h-6 bg-gradient-to-r from-primary to-foreground rounded-full shadow-lg"></div>
             </div>
           </div>
         ))}
       </div>
     ) : (
       <div class="text-center py-20">
-        <div class="inline-block p-8 bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg">
-          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="inline-block p-8 bg-background/60 backdrop-blur-lg rounded-2xl shadow-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z"></path>
             </svg>
           </div>
-          <p class="text-xl text-gray-700 font-medium mb-2">
+          <p class="text-xl text-foreground font-medium mb-2">
             Experiencia en desarrollo
           </p>
-          <p class="text-gray-500">
+          <p class="text-foreground/60">
             Pronto agregaré mi experiencia laboral
           </p>
         </div>

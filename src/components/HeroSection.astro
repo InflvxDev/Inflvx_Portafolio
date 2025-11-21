@@ -5,22 +5,22 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 <section
   id="inicio"
   class="relative min-h-screen flex items-center justify-center px-12 md:px-24 lg:px-32 py-20 
-         bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden"
+         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
 >
   <!-- Decoraciones de fondo -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <!-- Ondas azules decorativas -->
-    <div class="absolute top-20 left-10 w-32 h-32 bg-blue-200/30 rounded-full blur-xl animate-pulse"></div>
-    <div class="absolute top-40 right-20 w-24 h-24 bg-blue-300/20 rounded-full blur-lg animate-pulse delay-1000"></div>
-    <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-blue-400/15 rounded-full blur-2xl animate-pulse delay-500"></div>
+    <!-- Ondas decorativas -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-primary/30 rounded-full blur-xl animate-pulse"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-primary/20 rounded-full blur-lg animate-pulse delay-1000"></div>
+    <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-primary/15 rounded-full blur-2xl animate-pulse delay-500"></div>
     
     <!-- Líneas decorativas -->
-    <div class="absolute top-1/4 right-1/3 w-1 h-32 bg-gradient-to-b from-blue-400/50 to-transparent"></div>
-    <div class="absolute bottom-1/4 left-1/3 w-1 h-24 bg-gradient-to-b from-transparent to-blue-500/50"></div>
+    <div class="absolute top-1/4 right-1/3 w-1 h-32 bg-gradient-to-b from-primary/50 to-transparent"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-1 h-24 bg-gradient-to-b from-transparent to-foreground/50"></div>
     
     <!-- Puntos decorativos -->
-    <div class="absolute top-1/3 left-1/6 w-2 h-2 bg-blue-500/60 rounded-full animate-bounce"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-blue-600/70 rounded-full animate-bounce delay-700"></div>
+    <div class="absolute top-1/3 left-1/6 w-2 h-2 bg-primary/60 rounded-full animate-bounce"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-foreground/70 rounded-full animate-bounce delay-700"></div>
   </div>
 
   <div class="container mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-20 relative z-10">
@@ -29,12 +29,12 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     <div class="w-full md:w-1/2 flex justify-center">
       <div class="relative">
         <!-- Marco exterior animado -->
-        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 p-1 animate-spin-slow">
-          <div class="w-full h-full rounded-full bg-white"></div>
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-foreground to-primary p-1 animate-spin-slow">
+          <div class="w-full h-full rounded-full bg-background"></div>
         </div>
         
         <!-- Marco interior con glow -->
-        <div class="relative rounded-full p-3 bg-gradient-to-r from-blue-500/20 to-blue-700/20 backdrop-blur-md shadow-2xl">
+        <div class="relative rounded-full p-3 bg-gradient-to-r from-primary/20 to-foreground/20 backdrop-blur-md shadow-2xl">
           <img
             src={avatarUrl}
             alt="Avatar"
@@ -44,7 +44,7 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
         </div>
         
         <!-- Efecto de brillo -->
-        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine"></div>
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-background/20 to-transparent animate-shine"></div>
       </div>
     </div>
 
@@ -52,22 +52,22 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
     <div class="w-full md:w-1/2 text-center md:text-left space-y-6">
       <!-- Saludo animado -->
       <div class="animate-fadeInUp">
-        <span class="text-2xl md:text-3xl font-medium text-blue-600 mb-2 block">
+        <span class="text-2xl md:text-3xl font-medium text-primary mb-2 block">
           ¡Hola! Soy
         </span>
       </div>
       
       <!-- Título principal -->
       <div class="animate-fadeInUp delay-200">
-        <h1 class="text-5xl md:text-7xl font-extrabold text-gray-800 leading-tight relative">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-foreground leading-tight relative">
           {title}
-          <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full"></span>
+          <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-foreground rounded-full"></span>
         </h1>
       </div>
       
       <!-- Subtítulo -->
       <div class="animate-fadeInUp delay-400">
-        <p class="text-xl md:text-2xl text-gray-600 mt-6 leading-relaxed font-medium">
+        <p class="text-xl md:text-2xl text-foreground/70 mt-6 leading-relaxed font-medium">
           {subtitle}
         </p>
       </div>
@@ -76,21 +76,21 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
       <div class="animate-fadeInUp delay-600 pt-4">
         <a
           href="#contacto"
-          class="inline-block px-10 py-4 text-lg font-bold text-white 
-                 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full 
+          class="inline-block px-10 py-4 text-lg font-bold text-background 
+                 bg-gradient-to-r from-foreground to-primary rounded-full 
                  shadow-lg transition-all duration-300 transform 
-                 hover:scale-105 hover:shadow-2xl hover:from-blue-700 hover:to-blue-800
+                 hover:scale-105 hover:shadow-2xl hover:from-primary hover:to-foreground
                  relative overflow-hidden group"
         >
           <span class="relative z-10">{buttonText}</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-primary to-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </a>
       </div>
       
       <!-- Indicador de scroll -->
       <div class="animate-bounce pt-8">
-        <div class="w-6 h-10 border-2 border-blue-400 rounded-full mx-auto flex justify-center">
-          <div class="w-1 h-3 bg-blue-600 rounded-full mt-2 animate-pulse"></div>
+        <div class="w-6 h-10 border-2 border-primary rounded-full mx-auto flex justify-center">
+          <div class="w-1 h-3 bg-foreground rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
       
