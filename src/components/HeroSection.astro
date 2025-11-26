@@ -1,7 +1,15 @@
 ---
 import HeroNavBar from './HeroNavBar.astro';
+import { technologies } from '../data/technologies.js';
 
 const { title, subtitle, buttonText, avatarUrl } = Astro.props;
+
+// Obtener los SVGs de las tecnologías
+const getTechWithSvg = (techName: string) => {
+  return technologies.find(tech => tech.name === techName);
+};
+
+const techStack = ['React', 'Astro', 'Flutter', 'Angular', 'Python', 'C#', 'Java', 'SQL'];
 ---
 
 <section id="inicio" class="pt-4 pb-6">
@@ -52,11 +60,22 @@ const { title, subtitle, buttonText, avatarUrl } = Astro.props;
         <span class="text-foreground/60 text-sm font-medium uppercase tracking-wider">Stack Principal</span>
       </div>
       <div class="flex flex-wrap gap-2">
-        {['TypeScript', 'React', 'Astro', 'Python', 'SQL', 'Supabase'].map((tech) => (
-          <span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-lg text-sm font-medium border border-primary/20">
-            {tech}
-          </span>
-        ))}
+        {techStack.map((tech) => {
+          const techData = getTechWithSvg(tech);
+          return (
+            <span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-lg text-sm font-medium border border-primary/20 flex items-center gap-2">
+              {techData && (
+                <svg 
+                  class="w-4 h-4" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  set:html={techData.svg}
+                />
+              )}
+              {tech}
+            </span>
+          );
+        })}
       </div>
     </div>
 

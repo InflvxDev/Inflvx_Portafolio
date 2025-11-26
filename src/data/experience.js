@@ -13,7 +13,8 @@ export const experience = [
       }
     },
     description: "Desarrollo aplicaciones web para centralizar y automatizar procesos críticos de la clínica. Transformo sistemas manuales en soluciones digitales que mejoran la eficiencia operativa y gestión de datos médicos.",
-    technologies: ["Astro", "React", "Flutter", "Supabase", "SQL Server", "inteligencia artificial", "Python", "Selenium", "Excel", "JavaScript", "TypeScript"],
+    technologies: ["Astro", "React", "Flutter", "SQL Server", "Python"],
+    tools: ["VS Code + Copilot", "Git", "Supabase", "Excel", "Otros LLM"],
     achievements: [
       "Desarrollé KENWA un aplicativo movil prototipo para el control de tiempo, la mejora de la salud mental de los trabajadores, como parte de un concurso de salud y bienestar en el trabajo",
       "Desarrollé HOKOKU para centralizar la informacion administrativa, eliminando procesos manuales en Excel",

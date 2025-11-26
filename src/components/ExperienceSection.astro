@@ -14,6 +14,7 @@ interface Experience {
   };
   description: string;
   technologies: string[];
+  tools?: string[];
   achievements: string[];
 }
 
@@ -93,66 +94,132 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
   <!-- Grid de experiencia compacto -->
   {safeExperience.length > 0 ? (
     <div class="space-y-3">
-      {safeExperience.map((exp: Experience, index: number) => (
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 animate-in" style={`animation-delay: ${(index + 1) * 0.1}s`}>
-          
-          <!-- Empresa, cargo, periodo y descripcion en un solo bento -->
-          <div class="md:col-span-4 bento-box p-4">
-            <div class="flex items-start gap-3">
-              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-lg font-bold text-foreground leading-tight">
-                  {exp.company}
-                </h3>
-                <p class="text-primary text-sm font-medium">
-                  {exp.position}
-                </p>
-                <p class="text-foreground/50 text-xs mt-1">
-                  {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
-                </p>
-                <p class="text-secondary text-xs font-semibold mt-2">
-                  {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
-                </p>
-              </div>
-            </div>
-            <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
-          </div>
+      {safeExperience.map((exp: Experience, index: number) => {
+        const isEvenIndex = index % 2 === 0;
+        return (
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 animate-in" style={`animation-delay: ${(index + 1) * 0.1}s`}>
+            
+            {isEvenIndex ? (
+              <>
+                <!-- Layout 1: Empresa a la izquierda, Logros a la derecha -->
+                <div class="md:col-span-4 bento-box p-4">
+                  <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-lg font-bold text-foreground leading-tight">
+                        {exp.company}
+                      </h3>
+                      <p class="text-primary text-sm font-medium">
+                        {exp.position}
+                      </p>
+                      <p class="text-foreground/50 text-xs mt-1">
+                        {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
+                      </p>
+                      <p class="text-secondary text-xs font-semibold mt-2">
+                        {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
+                      </p>
+                    </div>
+                  </div>
+                  <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
+                </div>
 
-          <!-- Logros -->
-          <div class="md:col-span-8 bento-box p-4">
-            {exp.achievements && exp.achievements.length > 0 && (
-              <div>
-                <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Logros</span>
-                <ul class="space-y-1.5">
-                  {exp.achievements.map((achievement) => (
-                    <li class="flex items-start gap-2">
-                      <div class="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
-                      <span class="text-foreground/70 text-sm">{achievement}</span>
-                    </li>
+                <!-- Logros a la derecha -->
+                <div class="md:col-span-8 bento-box p-4">
+                  {exp.achievements && exp.achievements.length > 0 && (
+                    <div>
+                      <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Logros</span>
+                      <ul class="space-y-1.5">
+                        {exp.achievements.map((achievement) => (
+                          <li class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
+                            <span class="text-foreground/70 text-sm">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <!-- Layout 2: Logros a la izquierda, Empresa a la derecha -->
+                <div class="md:col-span-8 bento-box p-4">
+                  {exp.achievements && exp.achievements.length > 0 && (
+                    <div>
+                      <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Logros</span>
+                      <ul class="space-y-1.5">
+                        {exp.achievements.map((achievement) => (
+                          <li class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
+                            <span class="text-foreground/70 text-sm">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <div class="md:col-span-4 bento-box p-4">
+                  <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-lg font-bold text-foreground leading-tight">
+                        {exp.company}
+                      </h3>
+                      <p class="text-primary text-sm font-medium">
+                        {exp.position}
+                      </p>
+                      <p class="text-foreground/50 text-xs mt-1">
+                        {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
+                      </p>
+                      <p class="text-secondary text-xs font-semibold mt-2">
+                        {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
+                      </p>
+                    </div>
+                  </div>
+                  <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
+                </div>
+              </>
+            )}
+
+            <!-- Tecnologias -->
+            {exp.technologies && exp.technologies.length > 0 && (
+              <div class="md:col-span-6 bento-box p-3">
+                <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Tecnologías</span>
+                <div class="flex flex-wrap gap-1.5">
+                  {exp.technologies.map((tech) => (
+                    <span class="px-2 py-0.5 bg-primary/10 text-foreground rounded-md text-xs font-medium border border-primary/20">
+                      {tech}
+                    </span>
                   ))}
-                </ul>
+                </div>
+              </div>
+            )}
+
+            <!-- Herramientas -->
+            {exp.tools && exp.tools.length > 0 && (
+              <div class="md:col-span-6 bento-box p-3">
+                <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Herramientas</span>
+                <div class="flex flex-wrap gap-1.5">
+                  {exp.tools.map((tool) => (
+                    <span class="px-2 py-0.5 bg-secondary/10 text-foreground rounded-md text-xs font-medium border border-secondary/20">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
           </div>
-
-          <!-- Tecnologias en linea -->
-          {exp.technologies && exp.technologies.length > 0 && (
-            <div class="md:col-span-12 bento-box p-3">
-              <div class="flex flex-wrap gap-1.5">
-                {exp.technologies.map((tech) => (
-                  <span class="px-2 py-0.5 bg-primary/10 text-foreground rounded-md text-xs font-medium border border-primary/20">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   ) : (
     <div class="bento-box text-center py-8 p-4">
