@@ -16,7 +16,7 @@
 <script is:inline>
 	// Logica del boton Volver Arriba
 	const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-	
+
 	window.addEventListener('scroll', () => {
 		if (window.scrollY > 300) {
 			scrollToTopBtn.classList.remove('opacity-0', 'invisible');
@@ -26,11 +26,17 @@
 			scrollToTopBtn.classList.remove('opacity-100', 'visible');
 		}
 	});
-	
+
+	// Al hacer click, desplazar a la seccion con id "inicio" y actualizar el hash de la URL
 	scrollToTopBtn.addEventListener('click', () => {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		});
+		const target = document.getElementById('inicio');
+		if (target) {
+			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			// Actualiza el hash sin recargar
+			history.pushState(null, '', '#inicio');
+		} else {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+			history.pushState(null, '', '#inicio');
+		}
 	});
 </script>
