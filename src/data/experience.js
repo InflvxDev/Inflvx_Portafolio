@@ -13,12 +13,12 @@ export const experience = [
       }
     },
     description: "Desarrollo aplicaciones web para centralizar y automatizar procesos críticos de la clínica. Transformo sistemas manuales en soluciones digitales que mejoran la eficiencia operativa y gestión de datos médicos.",
-    technologies: ["Astro", "React", "Tailwind CSS", "Supabase", "inteligencia artificial", "SQL Server", "Python", "Selenium", "Excel", "JavaScript", "TypeScript"],
+    technologies: ["Astro", "React", "Flutter", "Supabase", "SQL Server", "inteligencia artificial", "Python", "Selenium", "Excel", "JavaScript", "TypeScript"],
     achievements: [
-      "Desarrollé HOKOKU para centralizar reportes médicos, eliminando procesos manuales en Excel",
-      "Creé BLOODSHOT BANCO DE SANGRE para gestión de componentes sanguíneos y control de ventas",
-      "Implementé BLOODSHOT SERVICIO TRANSFUSIONAL con formularios personalizados para ingresos, egresos y control de inventario de componentes sanguíneos",
-      "Automatizo procesos web con Python/Selenium y realizo ETL de datos complejos con Excel/SQL",
+      "Desarrollé KENWA un aplicativo movil prototipo para el control de tiempo, la mejora de la salud mental de los trabajadores, como parte de un concurso de salud y bienestar en el trabajo",
+      "Desarrollé HOKOKU para centralizar la informacion administrativa, eliminando procesos manuales en Excel",
+      "Creé BLOODSHOT para la gestión de banco de sangre y servicio transfusional, mejorando la trazabilidad y control de inventarios",
+      "Automatizo procesos web con Python/Selenium e implemente un hub de scripts para optimizar tareas repetitivas",
       "Realice un chatbot prototipo usando selenium y python para automatizar la consulta y recordatorio de citas para los pacientes de la clinica"
     ]
   },

@@ -1,0 +1,36 @@
+---
+// ScrollToTopButton.astro - Componente para boton de volver arriba
+---
+
+<button 
+	id="scrollToTopBtn"
+	class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl opacity-0 invisible transition-all duration-300 hover:bg-primary/90 hover:scale-110 hover:-translate-y-1 z-50"
+	title="Volver arriba"
+	aria-label="Volver arriba"
+>
+	<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/>
+	</svg>
+</button>
+
+<script is:inline>
+	// Logica del boton Volver Arriba
+	const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+	
+	window.addEventListener('scroll', () => {
+		if (window.scrollY > 300) {
+			scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+			scrollToTopBtn.classList.add('opacity-100', 'visible');
+		} else {
+			scrollToTopBtn.classList.add('opacity-0', 'invisible');
+			scrollToTopBtn.classList.remove('opacity-100', 'visible');
+		}
+	});
+	
+	scrollToTopBtn.addEventListener('click', () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	});
+</script>

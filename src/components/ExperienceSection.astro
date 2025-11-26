@@ -17,6 +17,48 @@ interface Experience {
   achievements: string[];
 }
 
+// Función para convertir nombre del mes a número
+const monthToNumber = (monthName: string): number => {
+  const months: { [key: string]: number } = {
+    "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
+    "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
+    "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
+  };
+  return months[monthName.toLowerCase()] || 1;
+};
+
+// Función para calcular duración
+const calculateDuration = (startMonth: string, startYear: number, endMonth: string, endYear: number): string => {
+  const startMonthNum = monthToNumber(startMonth);
+  let endMonthNum = monthToNumber(endMonth);
+  let finalYear = endYear;
+
+  // Si dice "Actual", usar el mes y año actual
+  if (endMonth.toLowerCase() === "actual") {
+    const now = new Date();
+    endMonthNum = now.getMonth() + 1;
+    finalYear = now.getFullYear();
+  }
+
+  // Calcular diferencia de meses
+  let totalMonths = (finalYear - startYear) * 12 + (endMonthNum - startMonthNum);
+  
+  if (totalMonths < 0) totalMonths = 0;
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years === 0) {
+    return months === 1 ? "1 mes" : `${months} meses`;
+  } else if (months === 0) {
+    return years === 1 ? "1 año" : `${years} años`;
+  } else {
+    const yearText = years === 1 ? "1 año" : `${years} años`;
+    const monthText = months === 1 ? "1 mes" : `${months} meses`;
+    return `${yearText} y ${monthText}`;
+  }
+};
+
 // Props con valor por defecto y validacion
 const { experience = [] } = Astro.props;
 const safeExperience = Array.isArray(experience) ? experience.filter(exp => 
@@ -71,6 +113,9 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                 </p>
                 <p class="text-foreground/50 text-xs mt-1">
                   {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
+                </p>
+                <p class="text-secondary text-xs font-semibold mt-2">
+                  {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
                 </p>
               </div>
             </div>
