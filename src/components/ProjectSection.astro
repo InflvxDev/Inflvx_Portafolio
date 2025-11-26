@@ -10,7 +10,7 @@ interface Project {
   repo?: string;
 }
 
-// Props con valor por defecto y validación
+// Props con valor por defecto y validacion
 const { projects = [] } = Astro.props;
 const safeProjects = Array.isArray(projects) ? projects.filter(project => 
   project?.title && 
@@ -20,105 +20,52 @@ const safeProjects = Array.isArray(projects) ? projects.filter(project =>
 ) : [];
 ---
 
-<section
-  id="proyectos"
-  class="relative py-32 px-6 md:px-16 lg:px-24 
-         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
->
-  <!-- Decoraciones de fondo -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <!-- Formas geométricas decorativas -->
-    <div class="absolute top-20 right-10 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
-    <div class="absolute bottom-20 left-10 w-32 h-32 bg-primary/15 rounded-full blur-2xl"></div>
-    <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/10 rounded-full blur-lg"></div>
-    
-    <!-- Líneas decorativas -->
-    <div class="absolute top-1/3 left-0 w-1 h-40 bg-gradient-to-b from-primary/30 to-transparent"></div>
-    <div class="absolute bottom-1/3 right-0 w-1 h-32 bg-gradient-to-b from-transparent to-foreground/30"></div>
-    
-    <!-- Puntos decorativos -->
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-foreground/50 rounded-full animate-pulse delay-1000"></div>
-  </div>
-
-  <div class="container mx-auto max-w-7xl relative z-10">
-    
-    <!-- Título con efectos especiales -->
-    <div class="text-center mb-20">
-      <div class="inline-block relative">
-        <h2 class="text-5xl md:text-6xl font-bold text-foreground relative z-10">
-          Mis Proyectos
-        </h2>
-        <!-- Subrayado animado -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-primary via-foreground to-primary rounded-full"></div>
-        <!-- Efecto de brillo -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-background/30 to-transparent rounded-full animate-shimmer"></div>
+<section id="proyectos" class="py-10">
+  <!-- Titulo -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
+    <div class="md:col-span-3 bento-box flex items-center justify-center p-6">
+      <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
+        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
       </div>
-      
-      <!-- Subtítulo descriptivo -->
-      <p class="text-xl text-foreground/70 mt-6 max-w-2xl mx-auto leading-relaxed">
-        Una colección de proyectos que demuestran mi pasión por la tecnología y la innovación
+    </div>
+    <div class="md:col-span-9 bento-box bento-accent animate-in p-6">
+      <span class="text-foreground/60 text-sm font-medium uppercase tracking-wider">Portafolio</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-foreground">
+        Mis Proyectos
+      </h2>
+      <p class="text-foreground/70 mt-2">
+        Una coleccion de proyectos que demuestran mi pasion por la tecnologia
       </p>
     </div>
-
-    <!-- Contenedor de proyectos con validación -->
-    {safeProjects.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-        {safeProjects.map((project: Project, index: number) => (
-          <div 
-            class="opacity-0 translate-y-10 animate-fadeInUp transition-all duration-700 ease-out"
-            style={`animation-delay: ${index * 150}ms`}
-          >
-            <ProjectCard project={project} />
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-20">
-        <div class="inline-block p-8 bg-background/60 backdrop-blur-lg rounded-2xl shadow-lg">
-          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-            </svg>
-          </div>
-          <p class="text-xl text-foreground font-medium mb-2">
-            No hay proyectos disponibles en este momento
-          </p>
-          <p class="text-foreground/60">
-            Pronto agregaré nuevos proyectos increíbles
-          </p>
-        </div>
-      </div>
-    )}
   </div>
+
+  <!-- Grid de proyectos - Simple 3 columnas sin huecos -->
+  {safeProjects.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {safeProjects.map((project: Project, index: number) => (
+        <div 
+          class="animate-in"
+          style={`animation-delay: ${index * 0.08}s`}
+        >
+          <ProjectCard project={project} />
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="bento-box text-center py-12 p-6">
+      <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+      </div>
+      <p class="text-xl text-foreground font-medium mb-2">
+        Sin proyectos
+      </p>
+      <p class="text-foreground/60">
+        Pronto agregare nuevos proyectos
+      </p>
+    </div>
+  )}
 </section>
-<!-- Efectos CSS mejorados -->
-<style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-fadeInUp {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-
-  .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
-  }
-</style>

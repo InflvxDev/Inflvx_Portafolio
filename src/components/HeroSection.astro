@@ -4,161 +4,75 @@ import HeroNavBar from './HeroNavBar.astro';
 const { title, subtitle, buttonText, avatarUrl } = Astro.props;
 ---
 
-<section
-  id="inicio"
-  class="relative min-h-screen flex flex-col items-center justify-center px-12 md:px-24 lg:px-32 pb-20 pt-20 md:pt-0
-         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
->
+<section id="inicio" class="pt-4 pb-6">
   <HeroNavBar />
-  <!-- Decoraciones de fondo -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <!-- Ondas decorativas -->
-    <div class="absolute top-20 left-10 w-32 h-32 bg-primary/30 rounded-full blur-xl animate-pulse"></div>
-    <div class="absolute top-40 right-20 w-24 h-24 bg-primary/20 rounded-full blur-lg animate-pulse delay-1000"></div>
-    <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-primary/15 rounded-full blur-2xl animate-pulse delay-500"></div>
+  
+  <!-- Bento Grid Hero -->
+  <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 mt-4">
     
-    <!-- Líneas decorativas -->
-    <div class="absolute top-1/4 right-1/3 w-1 h-32 bg-gradient-to-b from-primary/50 to-transparent"></div>
-    <div class="absolute bottom-1/4 left-1/3 w-1 h-24 bg-gradient-to-b from-transparent to-foreground/50"></div>
-    
-    <!-- Puntos decorativos -->
-    <div class="absolute top-1/3 left-1/6 w-2 h-2 bg-primary/60 rounded-full animate-bounce"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-foreground/70 rounded-full animate-bounce delay-700"></div>
-  </div>
-
-  <div class="container mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-20 relative z-10">
-    
-    <!-- Columna 1: Avatar con marco animado -->
-    <div class="w-full md:w-1/2 flex justify-center">
+    <!-- Avatar Box -->
+    <div class="md:col-span-3 lg:col-span-3 lg:row-span-2 bento-box flex items-center justify-center p-6 animate-in" style="animation-delay: 0.1s;">
       <div class="relative">
-        <!-- Marco exterior animado -->
-        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-foreground to-primary p-1 animate-spin-slow">
-          <div class="w-full h-full rounded-full bg-background"></div>
-        </div>
-        
-        <!-- Marco interior con glow -->
-        <div class="relative rounded-full p-3 bg-gradient-to-r from-primary/20 to-foreground/20 backdrop-blur-md shadow-2xl">
+        <div class="w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden border-2 border-primary/20">
           <img
             src={avatarUrl}
             alt="Avatar"
-            class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-xl 
-                   transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
-        
-        <!-- Efecto de brillo -->
-        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-background/20 to-transparent animate-shine"></div>
+        <div class="absolute -bottom-2 -right-2 w-5 h-5 bg-primary rounded-full border-3 border-white"></div>
       </div>
     </div>
 
-    <!-- Columna 2: Texto con animaciones mejoradas -->
-    <div class="w-full md:w-1/2 text-center md:text-left space-y-6">
-      <!-- Saludo animado -->
-      <div class="animate-fadeInUp">
-        <span class="text-2xl md:text-3xl font-medium text-primary mb-2 block">
-          ¡Hola! Soy
-        </span>
-      </div>
-      
-      <!-- Título principal -->
-      <div class="animate-fadeInUp delay-200">
-        <h1 class="text-5xl md:text-7xl font-extrabold text-foreground leading-tight relative">
-          {title}
-          <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-foreground rounded-full"></span>
-        </h1>
-      </div>
-      
-      <!-- Subtítulo -->
-      <div class="animate-fadeInUp delay-400">
-        <p class="text-xl md:text-2xl text-foreground/70 mt-6 leading-relaxed font-medium">
-          {subtitle}
-        </p>
-      </div>
-      
-      <!-- Botón principal mejorado -->
-      <div class="animate-fadeInUp delay-600 pt-4">
-        <a
-          href="#contacto"
-          class="inline-block px-10 py-4 text-lg font-bold text-background 
-                 bg-gradient-to-r from-foreground to-primary rounded-full 
-                 shadow-lg transition-all duration-300 transform 
-                 hover:scale-105 hover:shadow-2xl hover:from-primary hover:to-foreground
-                 relative overflow-hidden group"
-        >
-          <span class="relative z-10">{buttonText}</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-primary to-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </a>
-      </div>
-      
-      <!-- Indicador de scroll -->
-      <div class="animate-bounce pt-8">
-        <div class="w-6 h-10 border-2 border-primary rounded-full mx-auto flex justify-center">
-          <div class="w-1 h-3 bg-foreground rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
-      
+    <!-- Nombre y Saludo -->
+    <div class="md:col-span-3 lg:col-span-5 bento-box bento-accent animate-in p-6" style="animation-delay: 0.15s;">
+      <span class="text-primary font-medium text-lg">Hola! Soy</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-2 leading-tight">
+        {title}
+      </h1>
     </div>
+
+    <!-- Rol -->
+    <div class="md:col-span-3 lg:col-span-4 bento-box animate-in p-6" style="animation-delay: 0.2s;">
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-2 h-2 bg-primary rounded-full"></div>
+        <span class="text-foreground/60 text-sm font-medium uppercase tracking-wider">Rol</span>
+      </div>
+      <p class="text-foreground/80 text-lg leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="md:col-span-4 lg:col-span-5 bento-box animate-in p-6" style="animation-delay: 0.25s;">
+      <div class="flex items-center gap-2 mb-3">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+        </svg>
+        <span class="text-foreground/60 text-sm font-medium uppercase tracking-wider">Stack Principal</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {['TypeScript', 'React', 'Astro', 'Python', 'SQL', 'Supabase'].map((tech) => (
+          <span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-lg text-sm font-medium border border-primary/20">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="md:col-span-2 lg:col-span-4 bento-box bento-highlight flex items-center justify-center animate-in p-6" style="animation-delay: 0.3s;">
+      <a
+        href="#contacto"
+        class="w-full px-6 py-3 text-center font-semibold text-white bg-foreground rounded-xl
+               transition-all duration-300 hover:bg-primary hover:scale-[1.02]"
+      >
+        {buttonText}
+      </a>
+    </div>
+
   </div>
-
-
 </section>
-
-<!-- Animaciones mejoradas -->
-<style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes shine {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-fadeInUp {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-fadeInUp.delay-200 {
-    animation-delay: 0.2s;
-  }
-
-  .animate-fadeInUp.delay-400 {
-    animation-delay: 0.4s;
-  }
-
-  .animate-fadeInUp.delay-600 {
-    animation-delay: 0.6s;
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 8s linear infinite;
-  }
-
-  .animate-shine {
-    animation: shine 3s ease-in-out infinite;
-  }
-</style>
 
 <script is:inline>
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

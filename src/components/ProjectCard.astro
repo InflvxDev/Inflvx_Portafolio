@@ -8,265 +8,167 @@ interface Props {
     link?: string;
     repo?: string;
   };
+  size?: string;
 }
 
-const { project } = Astro.props as Props;
-
-// Paleta de colores brand moderna
-const colors = [
-  "bg-primary/10",
-  "bg-primary/15",
-  "bg-primary/20",
-];
-
-const bgColor = colors[Math.floor(Math.random() * colors.length)];
+const { project, size = '' } = Astro.props as Props;
+const cardId = `carousel-${project.title.replace(/\s+/g, '-').toLowerCase()}-${Math.random().toString(36).substr(2, 9)}`;
+const hasMultipleImages = project.images.length > 1;
+const hasLinks = project.link || project.repo;
 ---
 
-<style>
-  .carousel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 10px 25px color-mix(in srgb, var(--primary) 10%, transparent);
-  }
-  
-  .carousel-inner {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 14rem;
-  }
-  
-  .carousel-item {
-    min-width: 100%;
-    height: 100%;
-  }
-  
-  .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .carousel-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 1rem;
-  }
-  
-  .carousel-btn {
-    background: color-mix(in srgb, var(--background) 90%, transparent);
-    border: none;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-size: 1.2rem;
-    color: var(--foreground);
-  }
-  
-  .carousel-btn:hover {
-    background: var(--background);
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .carousel-indicators {
-    position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-  
-  .carousel-indicator {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-  }
-  
-  .carousel-indicator.active {
-    background-color: var(--primary);
-    border-color: var(--foreground);
-    transform: scale(1.2);
-  }
-
-  .tag-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--foreground));
-    color: var(--background);
-  }
-
-  .tag-light {
-    background: color-mix(in srgb, var(--primary) 10%, transparent);
-    color: var(--foreground);
-    border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
-  }
-
-  .tag-medium {
-    background: color-mix(in srgb, var(--foreground) 15%, transparent);
-    color: var(--foreground);
-    border: 1px solid color-mix(in srgb, var(--foreground) 30%, transparent);
-  }
-</style>
-
-<article class={`relative ${bgColor} backdrop-blur-xl rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-primary/30 p-6 group`}>
-  
-  <!-- Efecto de brillo en hover -->
-  <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-  
-  <div class="flex flex-col h-full relative z-10">
-    <!-- Carrusel de imágenes mejorado -->
-    {project.images.length > 0 && (
-      <div class="carousel" id={`carousel-${project.title.replace(/\s+/g, '-')}`}>
-        <div class="carousel-inner">
-          {project.images.map((image, index) => (
-            <div class="carousel-item">
-              <img 
-                src={image} 
-                alt={`${project.title} - Imagen ${index + 1}`}
-                loading="lazy"
-                class="transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-          ))}
-        </div>
-        
-        {project.images.length > 1 && (
-          <>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev" onclick={`moveSlide('${project.title.replace(/\s+/g, '-')}', -1)`}>
-                ‹
-              </button>
-              <button class="carousel-btn next" onclick={`moveSlide('${project.title.replace(/\s+/g, '-')}', 1)`}>
-                ›
-              </button>
-            </div>
-            
-            <div class="carousel-indicators">
-              {project.images.map((_, index) => (
-                <span 
-                  class={`carousel-indicator ${index === 0 ? 'active' : ''}`}
-                  onclick={`goToSlide('${project.title.replace(/\s+/g, '-')}', ${index})`}
-                ></span>
-              ))}
-            </div>
-          </>
-        )}
+<article class="bento-box h-full flex flex-col overflow-hidden group p-5">
+  <!-- Carrusel de imagenes -->
+  {project.images.length > 0 && (
+    <div class="relative overflow-hidden rounded-xl mb-4 h-40 md:h-44" id={cardId}>
+      <div class="carousel-container relative w-full h-full">
+        {project.images.map((img, idx) => (
+          <img 
+            src={img} 
+            alt={`${project.title} - ${idx + 1}`}
+            loading="lazy"
+            class={`carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
+            data-index={idx}
+          />
+        ))}
       </div>
-    )}
-    
-    <!-- Título con efecto especial -->
-    <h3 class="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+      
+      <!-- Controles del carrusel (siempre visibles si hay multiples imagenes) -->
+      {hasMultipleImages && (
+        <>
+          <!-- Flechas de navegacion -->
+          <button 
+            class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-md z-10"
+            data-carousel={cardId}
+            aria-label="Anterior"
+          >
+            <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button 
+            class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-md z-10"
+            data-carousel={cardId}
+            aria-label="Siguiente"
+          >
+            <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+          
+          <!-- Indicadores -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+            {project.images.map((_, idx) => (
+              <button 
+                class={`carousel-dot w-2 h-2 rounded-full transition-all shadow-sm ${idx === 0 ? 'bg-white' : 'bg-white/50'}`}
+                data-carousel={cardId}
+                data-index={idx}
+                aria-label={`Imagen ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )}
+  
+  <!-- Contenido -->
+  <div class="flex-1 flex flex-col min-h-0">
+    <h3 class="font-bold text-foreground group-hover:text-primary transition-colors text-lg mb-2 line-clamp-1">
       {project.title}
     </h3>
 
-    <!-- Descripción -->
-    <p class="text-foreground/80 mb-6 min-h-[4rem] line-clamp-3 leading-relaxed">
+    <p class="text-foreground/70 text-sm mb-4 flex-1 line-clamp-3">
       {project.description}
     </p>
     
-    <!-- Tags mejorados -->
-    <div class="flex flex-wrap gap-2 mb-6 mt-auto">
-      {project.tags.map((tag: string, index: number) => (
-        <span 
-          class={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-300 hover:scale-105 ${
-            index % 3 === 0 ? "tag-gradient" :
-            index % 3 === 1 ? "tag-light" :
-            "tag-medium"
-          }`}
-        >
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-1.5 mb-4">
+      {project.tags.slice(0, 4).map((tag: string) => (
+        <span class="px-2 py-1 bg-primary/10 text-foreground rounded-lg text-xs font-medium border border-primary/20">
           {tag}
         </span>
       ))}
+      {project.tags.length > 4 && (
+        <span class="px-2 py-1 text-foreground/50 text-xs">
+          +{project.tags.length - 4}
+        </span>
+      )}
     </div>
 
-    <!-- Botones de acción mejorados -->
-    <div class="flex gap-4 mt-auto">
-      {project.link && (
-        <a 
-          href={project.link} 
-          target="_blank"
-          class="flex items-center gap-2 px-4 py-2 bg-primary text-background rounded-lg hover:bg-foreground transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-medium text-sm"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-          Demo
-        </a>
-      )}
-      {project.repo && (
-        <a 
-          href={project.repo} 
-          target="_blank"
-          class="flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-medium text-sm"
-          aria-label="Repositorio en GitHub"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          Código
-        </a>
-      )}
-    </div>
+    <!-- Links (siempre visibles abajo) -->
+    {hasLinks && (
+      <div class="flex gap-2 mt-auto pt-2 border-t border-foreground/10">
+        {project.link && (
+          <a 
+            href={project.link} 
+            target="_blank"
+            class="flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-white rounded-lg text-xs font-medium hover:bg-primary transition-colors"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            Demo
+          </a>
+        )}
+        {project.repo && (
+          <a 
+            href={project.repo} 
+            target="_blank"
+            class="flex items-center gap-1.5 px-3 py-1.5 bg-foreground/10 text-foreground rounded-lg text-xs font-medium hover:bg-foreground/20 transition-colors"
+          >
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Codigo
+          </a>
+        )}
+      </div>
+    )}
   </div>
-
-  <!-- Efecto decorativo superior -->
-  <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-primary to-foreground rounded-full shadow-lg"></div>
-  <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-0.5 h-6 bg-gradient-to-b from-primary to-foreground"></div>
 </article>
 
 <script is:inline>
-  // Función para mover el carrusel
-  function moveSlide(carouselId, direction) {
-    const carousel = document.getElementById(`carousel-${carouselId}`);
-    const inner = carousel.querySelector('.carousel-inner');
-    const items = carousel.querySelectorAll('.carousel-item');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
+  // Carousel functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('[id^="carousel-"]');
     
-    const activeIndex = Array.from(items).findIndex(item => 
-      item.getBoundingClientRect().left >= carousel.getBoundingClientRect().left &&
-      item.getBoundingClientRect().right <= carousel.getBoundingClientRect().right
-    );
-    
-    let newIndex = activeIndex + direction;
-    
-    if (newIndex < 0) newIndex = items.length - 1;
-    if (newIndex >= items.length) newIndex = 0;
-    
-    inner.style.transform = `translateX(-${newIndex * 100}%)`;
-    
-    // Actualizar indicadores
-    indicators.forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === newIndex);
+    carousels.forEach(carousel => {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const dots = carousel.querySelectorAll('.carousel-dot');
+      const prevBtn = carousel.querySelector('.carousel-prev');
+      const nextBtn = carousel.querySelector('.carousel-next');
+      
+      if (slides.length <= 1) return;
+      
+      let currentIndex = 0;
+      
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('opacity-100', i === index);
+          slide.classList.toggle('opacity-0', i !== index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('bg-white', i === index);
+          dot.classList.toggle('bg-white/50', i !== index);
+        });
+        currentIndex = index;
+      }
+      
+      function nextSlide() {
+        showSlide((currentIndex + 1) % slides.length);
+      }
+      
+      function prevSlide() {
+        showSlide((currentIndex - 1 + slides.length) % slides.length);
+      }
+      
+      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); prevSlide(); });
+      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); nextSlide(); });
+      
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); showSlide(i); });
+      });
     });
-  }
-  
-  // Función para ir a un slide específico
-  function goToSlide(carouselId, index) {
-    const carousel = document.getElementById(`carousel-${carouselId}`);
-    const inner = carousel.querySelector('.carousel-inner');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
-    
-    inner.style.transform = `translateX(-${index * 100}%)`;
-    
-    // Actualizar indicadores
-    indicators.forEach((indicator, i) => {
-      indicator.classList.toggle('active', i === index);
-    });
-  }
+  });
 </script>

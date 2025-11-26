@@ -17,7 +17,7 @@ interface Experience {
   achievements: string[];
 }
 
-// Props con valor por defecto y validación
+// Props con valor por defecto y validacion
 const { experience = [] } = Astro.props;
 const safeExperience = Array.isArray(experience) ? experience.filter(exp => 
   exp?.company && 
@@ -27,176 +27,101 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
 ) : [];
 ---
 
-<section
-  id="experiencia"
-  class="relative py-32 px-6 md:px-16 lg:px-24 
-         bg-gradient-to-br from-background via-background to-primary/10 overflow-hidden"
->
-  <!-- Decoraciones de fondo -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <!-- Formas geométricas decorativas -->
-    <div class="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-20 right-10 w-24 h-24 bg-primary/15 rounded-full blur-xl"></div>
-    <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-primary/10 rounded-full blur-lg"></div>
-    
-    <!-- Líneas decorativas -->
-    <div class="absolute top-1/3 right-0 w-1 h-40 bg-gradient-to-b from-primary/30 to-transparent"></div>
-    <div class="absolute bottom-1/3 left-0 w-1 h-32 bg-gradient-to-b from-transparent to-foreground/30"></div>
-    
-    <!-- Puntos decorativos -->
-    <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-foreground/50 rounded-full animate-pulse delay-1000"></div>
-  </div>
-
-  <div class="container mx-auto max-w-6xl relative z-10">
-    
-    <!-- Título con efectos especiales -->
-    <div class="text-center mb-20">
-      <div class="inline-block relative">
-        <h2 class="text-5xl md:text-6xl font-bold text-foreground relative z-10">
-          Experiencia Laboral
-        </h2>
-        <!-- Subrayado animado -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-primary via-foreground to-primary rounded-full"></div>
-        <!-- Efecto de brillo -->
-        <div class="absolute -bottom-3 left-0 w-full h-2 bg-gradient-to-r from-transparent via-background/30 to-transparent rounded-full animate-shimmer"></div>
+<section id="experiencia" class="py-8">
+  <!-- Titulo de seccion compacto -->
+  <div class="grid grid-cols-2 md:grid-cols-12 gap-3 mb-4">
+    <div class="col-span-2 md:col-span-6 bento-box bento-accent animate-in p-4">
+      <div class="flex items-center gap-2 mb-1">
+        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        <span class="text-foreground/60 text-xs font-medium uppercase tracking-wider">Trayectoria</span>
       </div>
-      
-      <!-- Subtítulo descriptivo -->
-      <p class="text-xl text-foreground/70 mt-6 max-w-2xl mx-auto leading-relaxed">
-        Mi trayectoria profesional y las experiencias que han moldeado mi desarrollo
+      <h2 class="text-2xl md:text-3xl font-bold text-foreground">
+        Experiencia
+      </h2>
+    </div>
+    <div class="col-span-2 md:col-span-6 bento-box flex items-center p-4">
+      <p class="text-foreground/70 text-sm">
+        Mi desarrollo profesional y logros destacados.
       </p>
     </div>
-
-    <!-- Contenedor de experiencia con validación -->
-    {safeExperience.length > 0 ? (
-      <div class="space-y-12">
-        {safeExperience.map((exp: Experience, index: number) => (
-          <div 
-            class="opacity-0 translate-y-10 animate-fadeInUp transition-all duration-700 ease-out"
-            style={`animation-delay: ${index * 200}ms`}
-          >
-            <!-- Card de experiencia -->
-            <div class="relative bg-background/70 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-primary/30 p-8 md:p-10 group">
-              
-              <!-- Efecto de brillo en hover -->
-              <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div class="relative z-10">
-                <!-- Header con empresa y período -->
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                  <div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {exp.company}
-                    </h3>
-                    <p class="text-xl text-primary font-semibold mt-1">
-                      {exp.position}
-                    </p>
-                  </div>
-                  
-                  <!-- Período -->
-                  <div class="flex items-center gap-2 bg-gradient-to-r from-foreground to-primary text-background px-4 py-2 rounded-full shadow-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                    <span class="font-medium">
-                      {exp.period.start.month} {exp.period.start.year} - {exp.period.end.month} {exp.period.end.year}
-                    </span>
-                  </div>
-                </div>
-                
-                <!-- Descripción -->
-                <div class="mb-6">
-                  <p class="text-foreground/80 leading-relaxed text-lg">
-                    {exp.description}
-                  </p>
-                </div>
-                
-                <!-- Logros -->
-                {exp.achievements && exp.achievements.length > 0 && (
-                  <div class="mb-6">
-                    <h4 class="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
-                      <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                      </svg>
-                      Logros y Responsabilidades
-                    </h4>
-                    <ul class="space-y-2">
-                      {exp.achievements.map((achievement, idx) => (
-                        <li class="flex items-start gap-3">
-                          <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                          <span class="text-foreground/80">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                <!-- Tecnologías -->
-                {exp.technologies && exp.technologies.length > 0 && (
-                  <div class="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, idx) => (
-                      <span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-full text-sm font-medium border border-primary/50 hover:bg-primary/20 transition-colors duration-300">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-              
-              <!-- Efecto decorativo -->
-              <div class="absolute -top-3 left-8 w-6 h-6 bg-gradient-to-r from-primary to-foreground rounded-full shadow-lg"></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-20">
-        <div class="inline-block p-8 bg-background/60 backdrop-blur-lg rounded-2xl shadow-lg">
-          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z"></path>
-            </svg>
-          </div>
-          <p class="text-xl text-foreground font-medium mb-2">
-            Experiencia en desarrollo
-          </p>
-          <p class="text-foreground/60">
-            Pronto agregaré mi experiencia laboral
-          </p>
-        </div>
-      </div>
-    )}
   </div>
+
+  <!-- Grid de experiencia compacto -->
+  {safeExperience.length > 0 ? (
+    <div class="space-y-3">
+      {safeExperience.map((exp: Experience, index: number) => (
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 animate-in" style={`animation-delay: ${(index + 1) * 0.1}s`}>
+          
+          <!-- Empresa, cargo, periodo y descripcion en un solo bento -->
+          <div class="md:col-span-4 bento-box p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-foreground leading-tight">
+                  {exp.company}
+                </h3>
+                <p class="text-primary text-sm font-medium">
+                  {exp.position}
+                </p>
+                <p class="text-foreground/50 text-xs mt-1">
+                  {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
+                </p>
+              </div>
+            </div>
+            <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
+          </div>
+
+          <!-- Logros -->
+          <div class="md:col-span-8 bento-box p-4">
+            {exp.achievements && exp.achievements.length > 0 && (
+              <div>
+                <span class="text-foreground/50 text-xs font-medium uppercase tracking-wider mb-2 block">Logros</span>
+                <ul class="space-y-1.5">
+                  {exp.achievements.map((achievement) => (
+                    <li class="flex items-start gap-2">
+                      <div class="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
+                      <span class="text-foreground/70 text-sm">{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <!-- Tecnologias en linea -->
+          {exp.technologies && exp.technologies.length > 0 && (
+            <div class="md:col-span-12 bento-box p-3">
+              <div class="flex flex-wrap gap-1.5">
+                {exp.technologies.map((tech) => (
+                  <span class="px-2 py-0.5 bg-primary/10 text-foreground rounded-md text-xs font-medium border border-primary/20">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="bento-box text-center py-8 p-4">
+      <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z"></path>
+        </svg>
+      </div>
+      <p class="text-lg text-foreground font-medium mb-1">
+        Experiencia en desarrollo
+      </p>
+      <p class="text-foreground/60 text-sm">
+        Pronto agregare mi experiencia laboral
+      </p>
+    </div>
+  )}
 </section>
-
-<!-- Efectos CSS mejorados -->
-<style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-fadeInUp {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-
-  .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
-  }
-</style>

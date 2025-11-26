@@ -4,12 +4,12 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-
 :root {
-  --background: #f9f9f9;
+  --background: #eef2f6;
   --foreground: #003365;
   --primary: #06b6d4;
   --secondary: #9b4d31;
+  --card-bg: #ffffff;
 }
 
 /* Mapeo a Tailwind */
@@ -18,4 +18,55 @@ body {
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+}
+
+/* Bento Grid Base Styles */
+.bento-grid {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.bento-box {
+  background: var(--card-bg);
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.bento-box:hover {
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+/* Subtle accent for special boxes */
+.bento-accent {
+  background: color-mix(in srgb, var(--primary) 8%, var(--card-bg));
+}
+
+.bento-highlight {
+  background: color-mix(in srgb, var(--foreground) 4%, var(--card-bg));
+}
+
+/* Animation utilities */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
 }
