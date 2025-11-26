@@ -38,25 +38,4 @@ export const projects = [
     images: ["/projects/eotiacake.png","/projects/eotiacakeespeciales.png", "/projects/eotiacakeproductos.png"],
     repo: "https://github.com/Jmanriques/Proyecto_EOTIA_CAKE/tree/main/EOTIA_CAKE_APP"
   },
-  {
-    title: "SyZops",
-    description: "Datapack para Minecraft 1.19 que agrega variantes de diferentes mobs, como arañas, zombis, creepers y esqueletos.",
-    tags: ["McFunction"],
-    images: ["/projects/datapacklogo.png"],
-    repo: "https://github.com/InflvxDev/SyZops"
-  },
-  {
-    title: "You Lose Hearts if Death",
-    description: "Datapack para Minecraft 1.19 que reduce un corazón de vida cada vez que el jugador muere.",
-    tags: ["McFunction"],
-    images: ["/projects/datapacklogo.png"],
-    repo: "https://github.com/InflvxDev/you-lose-hearts-if-death"
-  },
-  {
-    title: "NeutrAgressive",
-    description: "Datapack para Minecraft 1.19 que hace que los mobs neutrales se vuelvan agresivos.",
-    tags: ["McFunction"],
-    images: ["/projects/datapacklogo.png"],
-    repo: "https://github.com/InflvxDev/NeutrAgressive"
-  }
 ];
