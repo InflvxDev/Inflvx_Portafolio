@@ -1,0 +1,396 @@
+---
+// ProjectModal.astro - Componente modal flotante para vista ampliada de proyectos
+---
+
+<!-- Modal Overlay -->
+<div 
+  id="project-modal" 
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4 md:p-8"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <!-- Backdrop -->
+  <div class="modal-backdrop absolute inset-0 bg-foreground/60 backdrop-blur-sm" data-close-modal></div>
+  
+  <!-- Modal Content -->
+  <div class="modal-content relative w-full max-w-4xl bg-card-bg rounded-2xl shadow-2xl overflow-hidden flex flex-col transform scale-95 opacity-0 transition-all duration-300"
+       style="background: var(--card-bg);">
+    
+    <!-- Close Button -->
+    <button 
+      class="absolute top-4 right-4 z-20 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+      data-close-modal
+      aria-label="Cerrar modal"
+    >
+      <svg class="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Content Area -->
+    <div class="flex-1">
+      <!-- Image Gallery Section -->
+      <div class="relative bg-background/95">
+        <!-- Main Image Display -->
+        <div class="relative h-72 md:h-96 lg:h-[28rem] overflow-hidden">
+          <div id="modal-gallery" class="relative w-full h-full flex items-center justify-center">
+            <!-- Images will be injected here -->
+          </div>
+          
+          <!-- Gallery Navigation -->
+          <button 
+            id="modal-prev-btn"
+            class="modal-nav-btn absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full items-center justify-center shadow-lg transition-all hover:scale-110 z-10"
+            aria-label="Imagen anterior"
+          >
+            <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <button 
+            id="modal-next-btn"
+            class="modal-nav-btn absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full items-center justify-center shadow-lg transition-all hover:scale-110 z-10"
+            aria-label="Imagen siguiente"
+          >
+            <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+
+          <!-- Image Counter -->
+          <div id="modal-counter" class="modal-counter absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/60 backdrop-blur-sm text-white rounded-full text-sm font-medium">
+            1 / 1
+          </div>
+        </div>
+
+        <!-- Thumbnail Strip -->
+        <div id="modal-thumbnails" class="modal-thumbnails gap-2 p-3 overflow-x-auto bg-foreground/90 justify-center">
+          <!-- Thumbnails will be injected here -->
+        </div>
+      </div>
+
+      <!-- Project Details -->
+      <div class="p-6 md:p-8">
+        <!-- Title -->
+        <h2 id="modal-title" class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          <!-- Title will be injected -->
+        </h2>
+
+        <!-- Description -->
+        <p id="modal-description" class="text-foreground/70 text-base md:text-lg leading-relaxed mb-6">
+          <!-- Description will be injected -->
+        </p>
+
+        <!-- Tags -->
+        <div class="mb-6">
+          <h3 class="text-sm font-semibold text-foreground/50 uppercase tracking-wide mb-3">Tecnologias</h3>
+          <div id="modal-tags" class="flex flex-wrap gap-2">
+            <!-- Tags will be injected -->
+          </div>
+        </div>
+
+        <!-- Links Section -->
+        <div id="modal-links" class="flex flex-wrap gap-3 pt-6 border-t border-foreground/10">
+          <!-- Links will be injected -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  const modal = document.getElementById('project-modal');
+  const modalContent = modal?.querySelector('.modal-content');
+  const gallery = document.getElementById('modal-gallery');
+  const thumbnails = document.getElementById('modal-thumbnails');
+  const counter = document.getElementById('modal-counter');
+  const prevBtn = document.getElementById('modal-prev-btn');
+  const nextBtn = document.getElementById('modal-next-btn');
+  const titleEl = document.getElementById('modal-title');
+  const descEl = document.getElementById('modal-description');
+  const tagsEl = document.getElementById('modal-tags');
+  const linksEl = document.getElementById('modal-links');
+
+  let currentImages = [];
+  let currentIndex = 0;
+
+  // Open modal function
+  window.openProjectModal = function(projectData) {
+    if (!modal || !projectData) return;
+
+    // Populate content
+    if (titleEl) titleEl.textContent = projectData.title || '';
+    if (descEl) descEl.textContent = projectData.description || '';
+
+    // Populate tags
+    if (tagsEl) {
+      tagsEl.innerHTML = (projectData.tags || []).map(tag => 
+        `<span class="px-3 py-1.5 bg-primary/10 text-foreground rounded-xl text-sm font-medium border border-primary/20">${tag}</span>`
+      ).join('');
+    }
+
+    // Populate links
+    if (linksEl) {
+      let linksHtml = '';
+      
+      if (projectData.link) {
+        linksHtml += `
+          <a href="${projectData.link}" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-2 px-5 py-2.5 bg-foreground text-white rounded-xl text-sm font-medium hover:bg-primary transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            Ver Demo
+          </a>
+        `;
+      }
+
+      if (projectData.web) {
+        linksHtml += `
+          <a href="${projectData.web}" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary/80 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+            </svg>
+            Visitar Web
+          </a>
+        `;
+      }
+
+      if (projectData.repo) {
+        linksHtml += `
+          <a href="${projectData.repo}" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-2 px-5 py-2.5 bg-foreground/10 text-foreground rounded-xl text-sm font-medium hover:bg-foreground/20 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Ver Codigo
+          </a>
+        `;
+      } else {
+        linksHtml += `
+          <span class="flex items-center gap-2 px-5 py-2.5 bg-foreground/5 text-foreground/50 rounded-xl text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            Repositorio Privado
+          </span>
+        `;
+      }
+
+      linksEl.innerHTML = linksHtml;
+    }
+
+    // Setup gallery
+    currentImages = projectData.images || [];
+    currentIndex = 0;
+    setupGallery();
+
+    // Show modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+
+    // Animate in
+    requestAnimationFrame(() => {
+      modalContent?.classList.remove('scale-95', 'opacity-0');
+      modalContent?.classList.add('scale-100', 'opacity-100');
+    });
+  };
+
+  // Setup gallery images
+  function setupGallery() {
+    if (!gallery) return;
+
+    // Clear previous content
+    gallery.innerHTML = '';
+
+    if (currentImages.length === 0) {
+      gallery.innerHTML = `
+        <div class="w-full h-full flex items-center justify-center">
+          <span class="text-white/50">Sin imagenes</span>
+        </div>
+      `;
+      return;
+    }
+
+    // Add images
+    currentImages.forEach((img, idx) => {
+      const imgEl = document.createElement('img');
+      imgEl.src = img;
+      imgEl.alt = `Imagen ${idx + 1}`;
+      imgEl.className = `absolute inset-0 w-full h-full object-contain transition-opacity duration-300 drop-shadow-2xl ${idx === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`;
+      imgEl.dataset.index = idx;
+      gallery.appendChild(imgEl);
+    });
+
+    // Setup thumbnails
+    if (thumbnails && currentImages.length > 1) {
+      thumbnails.classList.add('visible');
+      thumbnails.innerHTML = currentImages.map((img, idx) => `
+        <button 
+          class="thumbnail-btn flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-lg overflow-hidden border-2 transition-all hover:opacity-100 ${idx === 0 ? 'border-primary opacity-100' : 'border-transparent opacity-60 hover:border-white/30'}"
+          data-index="${idx}"
+        >
+          <img src="${img}" alt="Thumbnail ${idx + 1}" class="w-full h-full object-cover"/>
+        </button>
+      `).join('');
+
+      // Add thumbnail click handlers
+      thumbnails.querySelectorAll('.thumbnail-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index);
+          showImage(idx);
+        });
+      });
+    } else if (thumbnails) {
+      thumbnails.classList.remove('visible');
+    }
+
+    // Show/hide navigation buttons
+    const hasMultiple = currentImages.length > 1;
+    if (prevBtn) prevBtn.classList.toggle('visible', hasMultiple);
+    if (nextBtn) nextBtn.classList.toggle('visible', hasMultiple);
+    if (counter) {
+      counter.classList.toggle('visible', hasMultiple);
+      updateCounter();
+    }
+  }
+
+  // Show specific image
+  function showImage(index) {
+    if (!gallery) return;
+    
+    currentIndex = index;
+    
+    const images = gallery.querySelectorAll('img');
+    images.forEach((img, i) => {
+      img.classList.toggle('opacity-100', i === index);
+      img.classList.toggle('opacity-0', i !== index);
+      img.classList.toggle('pointer-events-none', i !== index);
+    });
+
+    // Update thumbnails
+    if (thumbnails) {
+      thumbnails.querySelectorAll('.thumbnail-btn').forEach((btn, i) => {
+        btn.classList.toggle('border-primary', i === index);
+        btn.classList.toggle('opacity-100', i === index);
+        btn.classList.toggle('border-transparent', i !== index);
+        btn.classList.toggle('opacity-60', i !== index);
+      });
+    }
+
+    updateCounter();
+  }
+
+  // Update counter
+  function updateCounter() {
+    if (counter && currentImages.length > 1) {
+      counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+    }
+  }
+
+  // Navigation
+  function nextImage() {
+    showImage((currentIndex + 1) % currentImages.length);
+  }
+
+  function prevImage() {
+    showImage((currentIndex - 1 + currentImages.length) % currentImages.length);
+  }
+
+  // Close modal function
+  function closeModal() {
+    if (!modal || !modalContent) return;
+
+    modalContent.classList.remove('scale-100', 'opacity-100');
+    modalContent.classList.add('scale-95', 'opacity-0');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  // Event listeners
+  if (prevBtn) prevBtn.addEventListener('click', prevImage);
+  if (nextBtn) nextBtn.addEventListener('click', nextImage);
+
+  // Close modal handlers
+  document.querySelectorAll('[data-close-modal]').forEach(el => {
+    el.addEventListener('click', closeModal);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+      closeModal();
+    }
+    // Arrow key navigation
+    if (!modal?.classList.contains('hidden') && currentImages.length > 1) {
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    }
+  });
+
+  // Prevent modal content clicks from closing
+  modalContent?.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+})();
+</script>
+
+<style>
+  #project-modal {
+    z-index: 9999;
+  }
+
+  /* Navigation elements hidden by default, shown via JS */
+  .modal-nav-btn,
+  .modal-counter,
+  .modal-thumbnails {
+    display: none;
+  }
+
+  .modal-nav-btn.visible,
+  .modal-counter.visible {
+    display: flex;
+  }
+
+  .modal-thumbnails.visible {
+    display: flex;
+  }
+
+  /* Custom scrollbar for modal */
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .modal-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background: var(--foreground);
+    opacity: 0.2;
+    border-radius: 3px;
+  }
+
+  /* Thumbnail scrollbar */
+  #modal-thumbnails::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  #modal-thumbnails::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  #modal-thumbnails::-webkit-scrollbar-thumb {
+    background: var(--foreground);
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+</style>

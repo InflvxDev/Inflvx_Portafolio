@@ -16,9 +16,16 @@ const { project, size = '' } = Astro.props as Props;
 const cardId = `carousel-${project.title.replace(/\s+/g, '-').toLowerCase()}-${Math.random().toString(36).substr(2, 9)}`;
 const hasMultipleImages = project.images.length > 1;
 const hasLinks = project.link || project.repo || project.web;
+
+// Serialize project data for the modal
+const projectDataJson = JSON.stringify(project);
 ---
 
-<article class="bento-box h-full flex flex-col overflow-hidden group p-5">
+<article 
+  class="bento-box h-full flex flex-col overflow-hidden group p-5 cursor-pointer"
+  data-project-card
+  data-project={projectDataJson}
+>
   <!-- Carrusel de imagenes -->
   {project.images.length > 0 && (
     <div class="relative overflow-hidden rounded-xl mb-4 h-40 md:h-44" id={cardId}>
@@ -192,6 +199,28 @@ const hasLinks = project.link || project.repo || project.web;
       
       dots.forEach((dot, i) => {
         dot.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); showSlide(i); });
+      });
+    });
+
+    // Project card click handler for modal
+    const projectCards = document.querySelectorAll('[data-project-card]');
+    projectCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Don't open modal if clicking on links or carousel controls
+        const target = e.target;
+        if (target.closest('a') || target.closest('button') || target.closest('.carousel-prev') || target.closest('.carousel-next') || target.closest('.carousel-dot')) {
+          return;
+        }
+        
+        const projectData = card.getAttribute('data-project');
+        if (projectData && typeof window.openProjectModal === 'function') {
+          try {
+            const project = JSON.parse(projectData);
+            window.openProjectModal(project);
+          } catch (err) {
+            console.error('Error parsing project data:', err);
+          }
+        }
       });
     });
   });
