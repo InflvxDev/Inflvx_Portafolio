@@ -5,7 +5,7 @@ export const projects = [
     tags: ["Flutter", "Dart"],
     images: ["/projects/kenwa.webp"],
     web: "https://kenwa.pages.dev/",
-  
+    repo: "https://github.com/InflvxDev/kenwa_app",
   },
   {
     title: "Hokoku",

@@ -1,7 +1,7 @@
 {
-  "name": "shaggy-singularity",
+  "name": "inflvxdev",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.1",
-    "astro": "5.16.0"
+    "astro": "5.16.6"
   },
   "devDependencies": {
     "tailwindcss": "4.1.10"
