@@ -1,21 +1,13 @@
 ---
+import type { Project } from '../types/index.ts';
+
 interface Props {
-  project: {
-    title: string;
-    description: string;
-    tags: string[];
-    images: string[];
-    link?: string;
-    repo?: string;
-    web?: string;
-  };
-  size?: string;
+  project: Project;
 }
 
-const { project, size = '' } = Astro.props as Props;
-const cardId = `carousel-${project.title.replace(/\s+/g, '-').toLowerCase()}-${Math.random().toString(36).substr(2, 9)}`;
+const { project } = Astro.props as Props;
+const cardId = `carousel-${project.title.replace(/\s+/g, '-').toLowerCase()}`;
 const hasMultipleImages = project.images.length > 1;
-const hasLinks = project.link || project.repo || project.web;
 
 // Serialize project data for the modal
 const projectDataJson = JSON.stringify(project);
@@ -34,7 +26,7 @@ const projectDataJson = JSON.stringify(project);
           <img 
             src={img} 
             alt={`${project.title} - ${idx + 1}`}
-            loading="lazy"
+            loading={idx === 0 ? "eager" : "lazy"}
             class={`carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
             data-index={idx}
           />
@@ -110,6 +102,7 @@ const projectDataJson = JSON.stringify(project);
         <a 
           href={project.link} 
           target="_blank"
+          rel="noopener noreferrer"
           class="flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-white rounded-lg text-xs font-medium hover:bg-primary transition-colors"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,6 +116,7 @@ const projectDataJson = JSON.stringify(project);
         <a 
           href={project.web} 
           target="_blank"
+          rel="noopener noreferrer"
           class="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary/80 transition-colors"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,6 +130,7 @@ const projectDataJson = JSON.stringify(project);
         <a 
           href={project.repo} 
           target="_blank"
+          rel="noopener noreferrer"
           class="flex items-center gap-1.5 px-3 py-1.5 bg-foreground/10 text-foreground rounded-lg text-xs font-medium hover:bg-foreground/20 transition-colors"
         >
           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">

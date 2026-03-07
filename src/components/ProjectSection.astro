@@ -1,14 +1,6 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
-
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  images: string[];
-  link?: string;
-  repo?: string;
-}
+import type { Project } from '../types/index.ts';
 
 // Props con valor por defecto y validacion
 const { projects = [] } = Astro.props;

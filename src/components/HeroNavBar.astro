@@ -1,9 +1,7 @@
 ---
-const links = [
-  { name: "Experiencia", path: "#experiencia" },
-  { name: "Proyectos", path: "#proyectos" },
-  { name: "Contacto", path: "#contacto" },
-];
+import { siteConfig } from '../data/site.config.js';
+
+const links = siteConfig.nav.filter(l => l.path !== '#inicio');
 ---
 
 <!-- Barra de navegacion estilo Bento -->

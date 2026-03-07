@@ -14,7 +14,14 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
-		<title>InflvxDev</title>
+		<title>{title ?? 'InflvxDev'}</title>
+		<!-- SEO -->
+		<meta name="description" content="Portfolio de Sebastian Ochoa Rangel — Ingeniero de Sistemas, Desarrollador y Analista de datos." />
+		<meta property="og:title" content="InflvxDev — Sebastian Ochoa Rangel" />
+		<meta property="og:description" content="Portafolio profesional con proyectos de desarrollo web, mobile y automatización." />
+		<meta property="og:image" content="/images/avatar.png" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<!-- Fuente Inter -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
