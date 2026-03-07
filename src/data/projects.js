@@ -1,23 +1,23 @@
 export const projects = [
   {
+    title: "Hokoku",
+    description: "Plataforma integral para la gestión y recolección de datos para las áreas administrativas y asistenciales de la organizacion humana integral OHI.",
+    tags: ["Astro", "React", "Supabase", "SqlServer"],
+    images: ["/projects/hokokulogin.webp", "/projects/hokokuwelcomeadmin.webp", "/projects/hokokuwelcomeusers.webp","/projects/hokokuwelcomeusers2.webp"],
+  },
+  {
+    title: "Hokoku BloodShot",
+    description: "Extension de hokoku para el registro y seguimiento de folios de banco de sangre, ademas control de inventiario para los componentes de servicio transfusional.",
+    tags: ["Astro", "React", "Supabase", "SqlServer"],
+    images: ["/projects/bloodshotlogin.webp","/projects/bloodshotwelcome.webp", "/projects/bloodshotfolioreg.webp","/projects/bloodshotfoliohis.webp", "/projects/bloodshotingcomp.webp", "/projects/bloodshotegrcomp.webp"],
+  },
+  {
     title: "Kenwa",
     description: "Aplicativo movil para el control del tiempo de trabajo y descanso laboral. Asi como el seguimiento del nivel de estres del empleado.",
     tags: ["Flutter", "Dart"],
     images: ["/projects/kenwa.webp"],
     web: "https://kenwa.pages.dev/",
     repo: "https://github.com/InflvxDev/kenwa_app",
-  },
-  {
-    title: "Hokoku",
-    description: "Plataforma integral para la gestión y seguimiento de información de las áreas administrativas de la organizacion humana integral OHI.",
-    tags: ["Astro", "React", "Supabase", "SqlServer"],
-    images: ["/projects/hokokulogin.webp", "/projects/hokokuwelcomeadmin.webp", "/projects/hokokuwelcomeusers.webp"],
-  },
-  {
-    title: "Hokoku BloodShot",
-    description: "Extension de hokoku para el registro y seguimiento de folios de banco de sangre, ademas control de inventiario para los componentes de servicio transfusional.",
-    tags: ["Astro", "React", "Supabase", "SqlServer"],
-    images: ["/projects/bloodshotlogin.webp", "/projects/bloodshotfolioreg.webp", "/projects/bloodshotingcomp.webp", "/projects/bloodshotegrcomp.webp", "/projects/bloodshotcomponentesinv.webp"],
   },
   {
     title: "Selenium ChatBot",
