@@ -119,9 +119,17 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                       <p class="text-foreground/50 text-xs mt-1">
                         {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
                       </p>
-                      <p class="text-secondary text-xs font-semibold mt-2">
-                        {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
-                      </p>
+                      {exp.period.end.month.toLowerCase() === 'actual' ? (
+                        <p class="text-secondary text-xs font-semibold mt-2 duration-live"
+                          data-start-month={exp.period.start.month}
+                          data-start-year={String(exp.period.start.year)}>
+                          Calculando...
+                        </p>
+                      ) : (
+                        <p class="text-secondary text-xs font-semibold mt-2">
+                          {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
@@ -180,9 +188,17 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
                       <p class="text-foreground/50 text-xs mt-1">
                         {exp.period.start.month.slice(0,3)} {exp.period.start.year} - {exp.period.end.month.slice(0,3)} {exp.period.end.year}
                       </p>
-                      <p class="text-secondary text-xs font-semibold mt-2">
-                        {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
-                      </p>
+                      {exp.period.end.month.toLowerCase() === 'actual' ? (
+                        <p class="text-secondary text-xs font-semibold mt-2 duration-live"
+                          data-start-month={exp.period.start.month}
+                          data-start-year={String(exp.period.start.year)}>
+                          Calculando...
+                        </p>
+                      ) : (
+                        <p class="text-secondary text-xs font-semibold mt-2">
+                          {calculateDuration(exp.period.start.month, exp.period.start.year, exp.period.end.month, exp.period.end.year)}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <p class="text-foreground/70 text-sm mt-3">{exp.description}</p>
@@ -237,3 +253,29 @@ const safeExperience = Array.isArray(experience) ? experience.filter(exp =>
     </div>
   )}
 </section>
+
+<script>
+  const MONTHS: Record<string, number> = {
+    enero: 1, febrero: 2, marzo: 3, abril: 4,
+    mayo: 5, junio: 6, julio: 7, agosto: 8,
+    septiembre: 9, octubre: 10, noviembre: 11, diciembre: 12,
+  };
+
+  function formatDuration(startMonth: string, startYear: number): string {
+    const now = new Date();
+    const startMonthNum = MONTHS[startMonth.toLowerCase()] ?? 1;
+    let totalMonths = (now.getFullYear() - startYear) * 12 + (now.getMonth() + 1 - startMonthNum);
+    if (totalMonths < 0) totalMonths = 0;
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+    if (years === 0) return months === 1 ? '1 mes' : `${months} meses`;
+    if (months === 0) return years === 1 ? '1 año' : `${years} años`;
+    return `${years === 1 ? '1 año' : `${years} años`} y ${months === 1 ? '1 mes' : `${months} meses`}`;
+  }
+
+  document.querySelectorAll<HTMLElement>('.duration-live').forEach(el => {
+    const month = el.dataset.startMonth;
+    const year = parseInt(el.dataset.startYear ?? '0', 10);
+    if (month && year) el.textContent = formatDuration(month, year);
+  });
+</script>

@@ -8,7 +8,7 @@ export const experience = [
         month: "Marzo",
       },
       end: {
-        year: 2025,
+        year: 2026,
         month: "Actual",
       },
     },
