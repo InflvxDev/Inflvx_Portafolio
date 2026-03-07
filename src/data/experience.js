@@ -25,25 +25,4 @@ export const experience = [
     ],
   },
 
-  // Puedes agregar más experiencias siguiendo la misma estructura:
-  // {
-  //   company: "Otra Empresa",
-  //   position: "Otro Cargo",
-  //   period: {
-  //     start: {
-  //       year: 2023,
-  //       month: "Marzo"
-  //     },
-  //     end: {
-  //       year: 2024,
-  //       month: "Diciembre"
-  //     }
-  //   },
-  //   description: "Descripción de la experiencia...",
-  //   technologies: ["Tech 1", "Tech 2"],
-  //   achievements: [
-  //     "Logro 1",
-  //     "Logro 2"
-  //   ]
-  // }
 ];

@@ -37,4 +37,27 @@ const { title } = Astro.props;
 		<Footer />
 		<ProjectModal />
 	</body>
+
+	<!-- IntersectionObserver: activa animate-in solo al entrar al viewport -->
+	<script is:inline>
+		(function () {
+			const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (prefersReduced) {
+				document.querySelectorAll('.animate-in').forEach(el => el.classList.add('in-view'));
+				return;
+			}
+			const observer = new IntersectionObserver(
+				entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('in-view');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1 }
+			);
+			document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+		})();
+	</script>
 </html>

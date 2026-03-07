@@ -62,8 +62,19 @@ body {
 }
 
 .animate-in {
-  animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
+}
+
+.animate-in.in-view {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .animate-in.in-view {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 /* Scroll behavior */

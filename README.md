@@ -8,29 +8,28 @@ This is a professional portfolio for **Sebastian Ochoa Rangel (InflvxDev)**, a S
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build) 5.16.0
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) 4.1.10 with Vite integration
-- **Language**: JavaScript/HTML
+- **Framework**: [Astro](https://astro.build) 5.18.0
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) 4.2.1 with Vite integration
+- **Language**: TypeScript / JavaScript
 - **Package Manager**: pnpm
 
 ## Features
 
 - **Responsive Design**: Mobile-first approach with desktop optimization using Tailwind CSS
 - **Hero Section**: Animated introduction with avatar, title, subtitle, and call-to-action button
-- **Navigation Bar**: Fixed navigation with smooth animations, desktop links, and mobile hamburger menu
+- **Navigation Bar**: Bento-style nav with smooth scroll to sections
 - **Experience Section**: Professional experience timeline with technologies and key achievements
-- **Project Portfolio**: 9+ projects displayed as cards with:
+- **Project Portfolio**: 7 projects displayed as cards with:
   - Image carousels with navigation controls
   - Project descriptions and technology tags
-  - Links to repositories where available
-- **Contact Section**: Integration for contact inquiries
-- **Animated Footer**: Gradient design with decorative elements
-- **Easter Egg**: Minecraft-themed easter egg (fixed position element)
-- **Dark Mode Support**: Tailwind CSS class-based dark mode configuration
+  - Links to demo, web, and repositories where available
+  - Modal view with full image gallery
+- **Contact Section**: Email, GitHub and LinkedIn links with availability status
+- **Scroll-to-top button**: Smooth return to top
 - **Animations**: 
-  - Fade-in effects on scroll
-  - Hovering and interactive transitions
-  - Animated decorative elements (pulsing, bouncing, shimmer effects)
+  - Fade-in effects triggered on scroll via IntersectionObserver
+  - Hover and interactive transitions
+  - Respects `prefers-reduced-motion`
 
 ## Project Highlights
 
@@ -47,31 +46,37 @@ The portfolio showcases diverse projects including:
 
 ```
 ├── public/                 # Static assets
-│   ├── eastereggs/        # Easter egg resources
-│   ├── images/            # Avatar and general images
+│   ├── images/            # General images
 │   └── projects/          # Project preview images
 ├── src/
-│   ├── assets/            # Local assets
-│   ├── components/        # Reusable components
-│   │   ├── NavBar.astro   # Fixed navigation with mobile menu
-│   │   └── ProjectCard.astro  # Project card with image carousel
-│   ├── data/              # Static data
-│   │   ├── experience.js  # Experience timeline data
-│   │   └── projects.js    # Project portfolio data
-│   ├── layouts/           # Page layouts
-│   │   └── Layout.astro   # Main layout with header and footer
-│   ├── pages/             # Page components
-│   │   ├── index.astro    # Main portfolio page
+│   ├── assets/            # Optimized local assets (avatar)
+│   ├── components/        # Reusable Astro components
+│   │   ├── HeroNavBar.astro
 │   │   ├── HeroSection.astro
 │   │   ├── ExperienceSection.astro
 │   │   ├── ProjectSection.astro
-│   │   └── ContactSection.astro
-│   └── styles/            # Global styles
-│       └── global.css
-├── astro.config.mjs       # Astro configuration with Tailwind integration
-├── tailwind.config.js     # Tailwind CSS configuration
-├── tsconfig.json          # TypeScript configuration
-└── package.json           # Project dependencies and scripts
+│   │   ├── ProjectCard.astro
+│   │   ├── ProjectModal.astro
+│   │   ├── ContactSection.astro
+│   │   ├── Footer.astro
+│   │   └── ScrollToTopButton.astro
+│   ├── data/              # Static content data
+│   │   ├── experience.js  # Experience timeline data
+│   │   ├── projects.js    # Project portfolio data
+│   │   ├── technologies.js# Tech stack SVG icons
+│   │   └── site.config.js # Centralised personal info
+│   ├── layouts/           # Page layouts
+│   │   └── Layout.astro
+│   ├── pages/             # Page entry points
+│   │   └── index.astro
+│   ├── styles/
+│   │   └── global.css
+│   └── types/
+│       └── index.ts       # Shared TypeScript interfaces
+├── astro.config.mjs
+├── eslint.config.js
+├── tsconfig.json
+└── package.json
 ```
 
 ## Getting Started
@@ -147,11 +152,11 @@ Edit `src/data/projects.js` to add or modify portfolio projects. Each project in
 - Image carousel images
 - Optional repository link
 
-### Styling
+### Update Site Info
 
-- Global styles: `src/styles/global.css`
-- Tailwind configuration: `tailwind.config.js`
-- Dark mode is supported via CSS class (`darkMode: 'class'`)
+Edit `src/data/site.config.js` to update your name, email, GitHub, LinkedIn, and navigation links from a single file.
+
+- Global styles: `src/styles/global.css` (CSS variables + `@theme` for Tailwind 4)
 
 ## License
 
