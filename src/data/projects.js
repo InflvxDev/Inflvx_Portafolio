@@ -20,11 +20,12 @@ export const projects = [
     repo: "https://github.com/InflvxDev/kenwa_app",
   },
   {
-    title: "Selenium ChatBot",
-    description: "Script que automatiza el envío de mensajes en WhatsApp para la consulta y recordatorio de citas médicas.",
-    tags: ["Python", "Selenium"],
-    images: ["/projects/seleniumbot.webp", "/projects/seleniumbot2.webp"],
-    repo: "https://github.com/InflvxDev/Selenium-Wpp-Messages-Automatic",
+    title: "Chusen",
+    description: "Aplicación web de sorteos en tiempo real. Importa tu lista de participantes desde un archivo Excel, define el premio y deja que Chusen elija al ganador",
+    tags: ["Astro", "React", "TailwindCSS"],
+    images: ["/projects/shusenhome.webp", "/projects/shusenresult.webp"],
+    web: "https://chusen.inflvx.org/",
+    repo: "https://github.com/InflvxDev/Chusen",
   },
   {
     title: "ASMUYCAVA App",
@@ -32,6 +33,7 @@ export const projects = [
     tags: ["Flutter", "Supabase", "Dart"],
     images: ["/projects/asmuycavalist.webp","/projects/asmuycavaapp.webp", "/projects/asmuycavadatos.webp", "/projects/asmuycavaperfil.webp"],
   },
+  
   {
     title: "Gneis AppWeb",
     description: "Aplicación web para la gestión de habitaciones y reservas en el Hotel Neruda.",
@@ -45,5 +47,12 @@ export const projects = [
     tags: ["Java", "Spring Boot"],
     images: ["/projects/eotiacake.webp","/projects/eotiacakeespeciales.webp", "/projects/eotiacakeproductos.webp"],
     repo: "https://github.com/Jmanriques/Proyecto_EOTIA_CAKE/tree/main/EOTIA_CAKE_APP"
+  },
+  {
+    title: "Selenium ChatBot",
+    description: "Script que automatiza el envío de mensajes en WhatsApp para la consulta y recordatorio de citas médicas.",
+    tags: ["Python", "Selenium"],
+    images: ["/projects/seleniumbot.webp", "/projects/seleniumbot2.webp"],
+    repo: "https://github.com/InflvxDev/Selenium-Wpp-Messages-Automatic",
   },
 ];
