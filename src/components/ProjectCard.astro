@@ -23,12 +23,12 @@ const projectDataJson = JSON.stringify(project);
     <div class="relative overflow-hidden rounded-xl mb-4 h-40 md:h-44" id={cardId}>
       <div class="carousel-container relative w-full h-full">
         {project.images.map((img, idx) => (
-          <img 
-            src={img} 
+          <img
+            src={img}
             alt={`${project.title} - imagen ${idx + 1}`}
             width="800"
             height="450"
-            loading={idx === 0 ? "eager" : "lazy"}
+            loading="lazy"
             class={`carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
             data-index={idx}
           />

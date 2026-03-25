@@ -6,9 +6,43 @@ import HeroSection from '../components/HeroSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import ContactSection from '../components/ContactSection.astro';
+import { siteConfig } from '../data/site.config.js';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  jobTitle: 'Ingeniero de Sistemas, Desarrollador Web y Analista de Datos',
+  description: 'Ingeniero de Sistemas de Colombia especialista en desarrollo web, mobile y análisis de datos.',
+  nationality: 'CO',
+  sameAs: [
+    siteConfig.social.github,
+    siteConfig.social.linkedin,
+  ],
+  knowsAbout: ['React', 'Astro', 'Flutter', 'Python', 'Next.js', 'Angular', 'C#', 'Java', 'SQL'],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: `${siteConfig.handle} — Portafolio`,
+  url: siteConfig.siteUrl,
+  description: `Portafolio profesional de ${siteConfig.name}, Ingeniero de Sistemas y Desarrollador.`,
+  author: {
+    '@type': 'Person',
+    name: siteConfig.name,
+  },
+};
 ---
 
-<Layout>
+<Layout
+	title="InflvxDev | Sebastian Ochoa Rangel — Desarrollador Web & Mobile"
+	description="Portafolio de Sebastian Ochoa Rangel, Ingeniero de Sistemas de Colombia. Especialista en desarrollo web, mobile y análisis de datos con React, Astro, Flutter y Python."
+	keywords="Sebastian Ochoa Rangel, InflvxDev, desarrollador web Colombia, ingeniero de sistemas, portafolio, React, Astro, Flutter, Python, desarrollo mobile, análisis de datos"
+>
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 	<div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4">
 		<HeroSection
 			title="Sebastian Ochoa Rangel"

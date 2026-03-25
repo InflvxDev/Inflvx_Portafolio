@@ -1,0 +1,56 @@
+---
+import { siteConfig } from '../data/site.config.js';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article' | 'profile';
+  keywords?: string;
+  author?: string;
+}
+
+const {
+  title = `${siteConfig.handle} | ${siteConfig.name}`,
+  description = `Portafolio profesional de ${siteConfig.name} — Ingeniero de Sistemas, Desarrollador web y móvil, y Analista de datos con experiencia en React, Astro, Flutter, Python y más.`,
+  image = `${siteConfig.siteUrl}/og-image.png`,
+  url = siteConfig.siteUrl,
+  type = 'website',
+  keywords = 'Sebastian Ochoa Rangel, InflvxDev, desarrollador web, ingeniero de sistemas, portafolio, React, Astro, Flutter, Python, Colombia',
+  author = siteConfig.name,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
+const resolvedUrl = url !== siteConfig.siteUrl ? url : canonicalUrl;
+const resolvedImage = image.startsWith('http') ? image : `${siteConfig.siteUrl}${image}`;
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={resolvedUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={resolvedImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`Preview de ${title}`} />
+<meta property="og:locale" content="es_CO" />
+<meta property="og:site_name" content={siteConfig.handle} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={resolvedUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={resolvedImage} />
+<meta name="twitter:image:alt" content={`Preview de ${title}`} />
+<meta name="twitter:creator" content={`@${siteConfig.handle}`} />

@@ -4,7 +4,17 @@ import '../styles/global.css';
 import ScrollToTopButton from '../components/ScrollToTopButton.astro';
 import Footer from '../components/Footer.astro';
 import ProjectModal from '../components/ProjectModal.astro';
-const { title } = Astro.props;
+import SEO from '../components/SEO.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  keywords?: string;
+}
+
+const { title, description, image, type, keywords } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,16 +22,16 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+		<link rel="icon" type="image/webp" href="/favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title ?? 'InflvxDev'}</title>
-		<!-- SEO -->
-		<meta name="description" content="Portfolio de Sebastian Ochoa Rangel — Ingeniero de Sistemas, Desarrollador y Analista de datos." />
-		<meta property="og:title" content="InflvxDev — Sebastian Ochoa Rangel" />
-		<meta property="og:description" content="Portafolio profesional con proyectos de desarrollo web, mobile y automatización." />
-		<meta property="og:image" content="/images/avatar.png" />
-		<meta property="og:type" content="website" />
-		<meta name="twitter:card" content="summary_large_image" />
+		<!-- SEO centralizado -->
+		<SEO
+			title={title}
+			description={description}
+			image={image}
+			type={type}
+			keywords={keywords}
+		/>
 		<!-- Fuente Inter -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
