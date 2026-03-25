@@ -12,6 +12,12 @@ export const projects = [
     images: ["/projects/bloodshotlogin.webp","/projects/bloodshotwelcome.webp", "/projects/bloodshotfolioreg.webp","/projects/bloodshotfoliohis.webp", "/projects/bloodshotingcomp.webp", "/projects/bloodshotegrcomp.webp"],
   },
   {
+    title: "JKanshi",
+    description: "Aplicativo web para el monitoreo de scripts para las automatizaciones de procesos con PM2",
+    tags: ["NextJs", "React", "Supabase", "PM2", "Python", "Node.js"],
+    images: ["/projects/jkanshiwelcome.webp","/projects/jkanshilogin.webp", "/projects/jkanshiscripts.webp","/projects/jkanshidetails.webp"],
+  },
+  {
     title: "Kenwa",
     description: "Aplicativo movil para el control del tiempo de trabajo y descanso laboral. Asi como el seguimiento del nivel de estres del empleado.",
     tags: ["Flutter", "Dart"],
