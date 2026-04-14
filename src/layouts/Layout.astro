@@ -1,6 +1,8 @@
 ---
 // src/layouts/Layout.astro
 import '@fontsource-variable/inter';
+import _interFontUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+const interFontUrl = _interFontUrl as unknown as string;
 import '../styles/global.css';
 import ScrollToTopButton from '../components/ScrollToTopButton.astro';
 import Footer from '../components/Footer.astro';
@@ -25,6 +27,7 @@ const { title, description, image, type, keywords } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/webp" href="/favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preload" href={interFontUrl} as="font" type="font/woff2" crossorigin />
 		<!-- SEO centralizado -->
 		<SEO
 			title={title}
