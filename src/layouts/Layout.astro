@@ -1,5 +1,6 @@
 ---
 // src/layouts/Layout.astro
+import '@fontsource-variable/inter';
 import '../styles/global.css';
 import ScrollToTopButton from '../components/ScrollToTopButton.astro';
 import Footer from '../components/Footer.astro';
@@ -32,10 +33,7 @@ const { title, description, image, type, keywords } = Astro.props;
 			type={type}
 			keywords={keywords}
 		/>
-		<!-- Fuente Inter -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
 	</head>
 	<body class="bg-background min-h-screen">
 		<main>
